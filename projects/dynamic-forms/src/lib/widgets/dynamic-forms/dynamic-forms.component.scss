@@ -1,0 +1,104 @@
+﻿/* .two-column {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    column-gap: 6rem;
+} */
+@import "~@netiq/ias-bootstrap/dist/ias-bootstrap.min.css";
+$color_1: dimgrey;
+
+.d-flex {
+    display: flex;
+}
+
+.form-table {
+    background: #d0d2d236;
+    padding: 0px 10px;
+    border-radius: 4px;
+}
+
+
+
+.checkbox-column {
+    vertical-align: bottom;
+    padding-bottom: 6px;
+}
+
+.action {
+    @extend .checkbox-column;
+    padding: 0;
+}
+
+
+// custom table css 
+.v-table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+    margin-left: 8px;
+
+    thead {
+        tr {
+            th {
+                text-align: center;
+                padding-bottom: 8px;
+            }
+
+            .checkbox-column {
+                text-align: left !important;
+            }
+        }
+    }
+
+    td {
+        padding: 8px 10px 0px 10px;
+
+        span {
+            color: $color_1;
+            display: none;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 5px;
+            position: absolute;
+            text-transform: uppercase;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    td.action {
+        display: flex;
+        align-items: baseline;
+    }
+
+    tr {
+        vertical-align: middle;
+        border-bottom: 1px solid #cdd1d5;
+    }
+}
+
+td.checkbox-column {
+    padding: 10px 0px !important;
+    vertical-align: middle;
+}
+
+form>.form-group-validate {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+::ng-deep form>.form-group-validate label,
+form>.form-group-validate button {
+    margin-top: 14px;
+}
+
+::ng-deep form>.form-group-validate button {
+    justify-self: end;
+}
+
+::ng-deep form>.form-group-validate .form-control {
+    font-size: 14px !important;
+}
+
+.action>.btn {
+    margin-top: 8px !important;
+}

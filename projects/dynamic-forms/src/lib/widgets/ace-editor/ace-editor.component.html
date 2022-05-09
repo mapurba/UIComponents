@@ -1,0 +1,66 @@
+﻿<!-- 
+* ========================================================================
+* (c) Copyright 2022 Micro Focus or one of its affiliates.
+* ========================================================================
+-->
+
+<ng-container *ngIf="_type == 'javascript'; then trueBlock; else falseBlock"></ng-container>
+
+<!-- <ng-template #trueBlock>
+
+  < [unit]="'pixel'" [useTransition]="true" class="full-height">
+    <as-split-area [size]="300" [minSize]="34" [maxSize]="600">
+      <div class="side-bar">
+        <button id="open-List" type="button" class="btn btn-link btn-icon button-secondary d-none side-bar-icon "
+          (click)="openSideBar()" aria-label="Show Test And Templates" title="{{'Show Outline View' | translate}}">
+          <i class="list"></i>
+        </button>
+        <div class="side-bar-list">
+          <details class="m-t-0">
+            <summary class="left sticky-header">
+              <div class="sticky-header">
+                OutLine
+                <div role="toolbar" class="toolbar">
+                  <div class="ux-toolbar-right">
+                    <button type="button" class="btn btn-link btn-icon button-secondary" (click)="closeSideBar()"
+                      aria-label="Close Outline View" title="{{'Close Outline View'|translate}}">
+                      <i class="close"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </summary>
+            <div class="p-r-12">
+              <div class="editor-col">
+                <div #shoes [multiple]="false" class="m-t-0 p-l-8">
+                  <div *ngFor="let funcs of functionList" [value]="shoe"
+                    (click)="editorRef.gotoLine(funcs?.rownum+1)">
+                    <i class="ias-icon ias-icon-code">
+                    </i>
+                    <div mat-line>{{funcs?.name}}</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+
+    </as-split-area>
+    <as-split-area [size]="'*'" [minSize]="600">
+      <div class="idm-ace-editor" #editor></div>
+    </as-split-area>
+  </as-split>
+
+
+
+</ng-template> -->
+<ng-template #trueBlock>
+  <div class="idm-ace-editor" #editor></div>
+</ng-template>
+
+<ng-template #falseBlock>
+  <div class="idm-ace-editor" #editor></div>
+</ng-template>

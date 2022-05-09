@@ -1,0 +1,175 @@
+﻿<!-- 
+* ========================================================================
+* (c) Copyright 2022 Micro Focus or one of its affiliates.
+* ========================================================================
+-->
+<ng-container *ngIf="!inputsField?.hidden" [formGroup]="form">
+  <ng-container [ngSwitch]="inputsField?.controlType">
+
+    <!-- 
+    =========================================================================================================================
+      input text box accpets text password number email url date time month week time-zone color
+    =========================================================================================================================
+    -->
+    <ng-container *ngSwitchCase="'textbox'">
+      <label class="form-label" [attr.for]="inputsField?.key" *ngIf="!inputsField?.labelHidden">
+        {{inputsField?.label}}
+        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      </label>
+      <input [type]="inputsField?.type" [formControlName]="inputsField?.key" [placeholder]="inputsField?.label"
+        [id]="inputsField?.key" [name]="inputsField?.label" class="form-control">
+
+      <ng-container *ngIf="!isValid && isTouched">
+        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span class="validation-error-text">Required -
+          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
+          {{inputsField?.label}}</span>
+      </ng-container>
+    </ng-container>
+
+
+    <!-- 
+    =========================================================================================================================
+      Textarea
+    =========================================================================================================================
+    -->
+    <ng-container *ngSwitchCase="'textarea'">
+      <label class="form-label" [attr.for]="inputsField?.key">
+        {{inputsField?.label}}
+        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      </label>
+      <textarea [formControlName]="inputsField?.key" rows="4" [formGroup]="form" [placeholder]="inputsField?.label"
+        [id]="inputsField?.key" [name]="inputsField?.label" class="form-control"></textarea>
+      <ng-container *ngIf="!isValid && isTouched">
+        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span class="validation-error-text">Required -
+          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
+          {{inputsField?.label}}</span>
+      </ng-container>
+    </ng-container>
+
+    <!-- 
+    =========================================================================================================================
+      Type ahead input text box accpets text password number email url date time month week time-zone color
+    =========================================================================================================================
+    -->
+    <ng-container *ngSwitchCase="'typeahead'">
+      <label class="form-label" for="{{inputsField?.key}}">
+        {{inputsField?.label}}
+        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      </label>
+      <type-ahead [value]="inputsField?.value" (valueChange)="valueInput($event);" [type]="inputsField?.type"
+        [inputField]="inputsField" [form]="form" [values]="inputsField?.options">
+      </type-ahead>
+
+      <ng-container *ngIf="!isValid && isTouched">
+        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span class="validation-error-text">Required -
+          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
+          {{inputsField?.label}}</span>
+      </ng-container>
+    </ng-container>
+
+
+
+    <!-- 
+    =========================================================================================================================
+      Input dropdown 
+    =========================================================================================================================
+    -->
+
+    <ng-container *ngSwitchCase="'dropdown'">
+      <label class="form-label" [attr.for]="inputsField?.key">
+        {{inputsField?.label}}
+        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      </label>
+      <ux-select [formControlName]="inputsField?.key" [multiple]="inputsField?.multiValue" [clearButton]="true"
+        [allowNull]="true" [key]="'id'" [value]="inputsField?.value" [display]="'name'" [options]="inputsField?.options"
+        placeholder="{{inputsField?.label}}"></ux-select>
+      <ng-container *ngIf="!isValid && isTouched">
+        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span class="validation-error-text">Required -
+          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
+          {{inputsField?.label}}
+        </span>
+      </ng-container>
+
+    </ng-container>
+
+
+    <!-- 
+    =========================================================================================================================
+      Input checkbox 
+    =========================================================================================================================
+    -->
+
+
+    <ng-container *ngSwitchCase="'checkbox'">
+      <label class="ias-checkbox">
+        <input type="checkbox" [value]="inputsField?.value" [disabled]="inputsField?.disabled"
+          [formControlName]="inputsField?.key">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32"
+          class=" ias-icon ias-icon-check_thick " viewBox="0 0 32 32">
+          <title>m_check</title>
+          <path d="M12.124 26.084l-8.791-8.791 1.253-1.253 7.538 7.533 16.48-16.484 1.258 1.258z" />
+        </svg>
+        <span>{{inputsField.label}}
+          <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+        </span>
+      </label>
+      <ng-container *ngIf="!isValid && isTouched">
+        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span class="validation-error-text">Required -
+          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
+          {{inputsField?.label}}
+        </span>
+      </ng-container>
+    </ng-container>
+
+
+    <!-- 
+    =========================================================================================================================
+      Input radio 
+    =========================================================================================================================
+    -->
+
+    <ng-container *ngSwitchCase="'radio'">
+      <ng-container *ngFor="let opt of inputsField?.options">
+        <label class="ias-radio-button">
+          <input type="radio" value="{{opt.id}}" [disabled]="inputsField?.disabled"
+            [formControlName]="inputsField?.key">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32"
+            class=" ias-icon ias-icon-check_thick " viewBox="0 0 32 32">
+            <title>check</title>
+            <path d="M12.124 26.084l-8.791-8.791 1.253-1.253 7.538 7.533 16.48-16.484 1.258 1.258z" />
+          </svg>
+          <span>{{opt?.name||opt?.id}}
+            <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+          </span>
+        </label>
+      </ng-container>
+      <ng-container *ngIf="!isValid && (isTouched || isDirty)">
+        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span class="validation-error-text">Required -
+          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
+          {{inputsField?.label}}
+        </span>
+      </ng-container>
+    </ng-container>
+
+    <!-- 
+    =========================================================================================================================
+     js editor  
+    =========================================================================================================================
+    -->
+
+
+    <div class="input-group w-100" *ngSwitchCase="'richText'" class="{{inputsField?.key}}">
+      <form-ace-editor (change)="valueInput($event);" [file]="inputsField?.value" [type]="inputsField?.type">
+      </form-ace-editor>
+    </div>
+
+  </ng-container>
+
+
+</ng-container>

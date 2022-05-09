@@ -1,0 +1,78 @@
+﻿
+.idm-ace-editor {
+    height: calc(100vh - 222px);
+    min-width: calc(100vh - 222px);
+}
+
+.ace-editor-container {
+    display: grid;
+    grid-template-columns: 0.09fr 0.5fr 2.9fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    background: white;
+    height: 100%;
+    
+}
+
+.ace-editor-container.two-col{
+    grid-template-columns: 0.09fr 2.9fr;
+}
+
+
+.editor-col-list{
+    display: flex;
+    justify-content: center;
+}
+/* For presentation only, no need to copy the code below */
+
+.ace-editor-container > .editor-col {
+    border: 1px solid #dae1e1;
+    height: 100%;
+    /* height: calc(100vh - 58px);  */
+}
+
+::ng-deep .mat-list-base .mat-list-item .mat-list-item-content-reverse, .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+    padding: 0 !important; 
+    justify-content: left !important;
+}
+::ng-deep  .mat-list-base .mat-list-item.mat-list-item-with-avatar, .mat-list-base .mat-list-option.mat-list-item-with-avatar {
+    height: 38px !important;
+}
+
+::ng-deep .mat-list-text {
+    padding-left: 6px !important;
+} 
+
+::ng-deep .mat-list-base .mat-list-item .mat-list-icon, .mat-list-base .mat-list-option .mat-list-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    font-size: 20px;
+    box-sizing: content-box;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+:ng-deep .mat-list-base {
+    padding-top: 0px;
+}
+.full-height{
+    height: calc(100vh - 222px);
+}
+
+::ng-deep as-split-area.as-split-area.as-min {
+}
+
+::ng-deep as-split-area.as-split-area.as-min>.side-bar>.side-bar-icon {
+    display: block;
+}
+
+::ng-deep as-split-area.as-split-area.as-min>.side-bar>.side-bar-list {
+    display: none;
+}
+.toolbar{
+    margin-left: auto;
+}
+::ng-deep .mat-list-item-content.mat-list-item-content-reverse:hover, mat-list-option.mat-list-item.mat-list-option.mat-focus-indicator.mat-list-item-with-avatar.mat-accent.ng-star-inserted.mat-list-single-selected-option {
+    background: rgba(0, 115, 231, 0.2);
+}
