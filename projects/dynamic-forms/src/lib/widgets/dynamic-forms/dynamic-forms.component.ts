@@ -6,7 +6,7 @@
 
 
 import { FocusOrigin } from '@angular/cdk/a11y';
-import { ChangeDetectorRef, Component, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { VariableService } from '../utils/Variable.service';
 import { DynamicFormsControlService } from './dynamic-forms-control.service';
@@ -18,7 +18,7 @@ import { FormInput } from './schema/form-input';
   styleUrls: ['./dynamic-forms.component.scss'],
   providers: [DynamicFormsControlService]
 })
-export class DynamicFormsComponent implements OnInit {
+export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
   public _inputFields: FormInput<string>[];
   @Input("inputFields")
@@ -36,20 +36,32 @@ export class DynamicFormsComponent implements OnInit {
   @Output() isFormValid?: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() hideSubmit: boolean = false;
   @Input() disabled?: boolean = false;
-  @Input() classNames?: any[];
+  @Input() inlineFormElements?: boolean = false;
   @Input() virtualScroller?: boolean = false;
   @Input() form?: FormGroup;
-  payLoad = '';
-  selectedKey: any;
+  @ViewChild('formdiv') formdiv: ElementRef;
+
+  setinlineForm = false;
 
   // multiValue form selection
   selection: any[] = [];
-
+  payLoad = '';
+  selectedKey: any;
 
   constructor(private dfcs: DynamicFormsControlService, private _ngZone: NgZone, private _cdr: ChangeDetectorRef) {
 
   }
 
+
+  ngAfterViewChecked() {
+    if (this.formdiv?.nativeElement?.offsetWidth == 0 || !this.inlineFormElements) return;
+
+    if (this.formdiv?.nativeElement?.offsetWidth <= 800) {
+      this.setinlineForm = false
+    } else {
+      this.setinlineForm = true;
+    }
+  }
 
   // Workaround for the fact that (cdkFocusChange) emits outside NgZone.
   markForCheck() {
@@ -58,6 +70,7 @@ export class DynamicFormsComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
+    this.setinlineForm = this.inlineFormElements;
   }
 
   submit(form) {

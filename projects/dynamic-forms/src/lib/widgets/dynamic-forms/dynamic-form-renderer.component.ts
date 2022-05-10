@@ -19,6 +19,7 @@ export class DynamicFormRendererComponent implements OnInit {
   @Input() inputsField: FormInput<string>;
   @Output() inputFieldsChange?: EventEmitter<any> = new EventEmitter<any>();
   @Input() form: FormGroup;
+  @Input() inlineFormElements?: boolean = false;
   // get isValid() {
   //   let value = this.form?.controls[this.inputsField.key].value, isvalid = true;
   //   if (this.inputsField.validate != undefined) {

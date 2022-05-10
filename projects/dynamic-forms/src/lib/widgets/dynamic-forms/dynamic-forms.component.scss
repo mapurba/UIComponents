@@ -6,21 +6,54 @@
 @import "~@netiq/ias-bootstrap/dist/ias-bootstrap.min.css";
 $color_1: dimgrey;
 
+
+$spaceamounts: (0, 2, 4, 8, 12, 16, 20, 24);
+$sides: ("a": "",
+    "t": "top",
+    "b": "bottom",
+    "l": "left",
+    "r": "right",
+);
+
+@each $space in $spaceamounts {
+
+    @each $prefix,
+    $value in $sides {
+        $property: if($prefix=="a", "", -#{$value});
+
+        .m-#{$prefix}-#{$space} {
+            margin#{$property}: #{$space}px !important;
+        }
+
+        .p-#{$prefix}-#{$space} {
+            padding#{$property}: #{$space}px !important;
+        }
+    }
+}
+
+
 .d-flex {
     display: flex;
 }
 
 .form-table {
-    background: #d0d2d236;
-    padding: 0px 10px;
-    border-radius: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    .btn-container {
+        background: #d0d2d236;
+    }
 }
+
 
 
 
 .checkbox-column {
     vertical-align: bottom;
     padding-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .action {
@@ -34,7 +67,8 @@ $color_1: dimgrey;
     border-collapse: collapse;
     text-align: left;
     width: 100%;
-    margin-left: 8px;
+    background: #d0d2d236;
+
 
     thead {
         tr {
@@ -101,4 +135,14 @@ form>.form-group-validate button {
 
 .action>.btn {
     margin-top: 8px !important;
+}
+
+::ng-deep form>.form-group-validate {
+    margin-bottom: 0 !important;
+}
+
+.aligh-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

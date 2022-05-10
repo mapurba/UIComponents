@@ -88,6 +88,7 @@ export class TypeAheadComponent implements AfterViewInit, OnInit {
 
   async createVariable() {
     let value;
+    console.log(this.inputField.createVariable);
     if (!VariableService.isUndefinedOrNull(this.form.controls['displayName'])) {
       if (this.inputField.createVariable) {
         value = await this.inputField.createVariable(this._value, this.form.controls['displayName'].value, this.inputField.key);
@@ -101,8 +102,8 @@ export class TypeAheadComponent implements AfterViewInit, OnInit {
       } else {
         value = await VariableService.convertVariable(this._value, this.inputField.key, "-" + VariableService.S4());
       }
-      this._value = value;
     }
+    this._value = value;
   }
 
   keyfind(val: any): string {

@@ -26,6 +26,7 @@ export class FormInput<T> {
   browserChildFlag?: boolean;
   notVisible?: boolean;
   errorMsg?: string;
+  createVariable?: any;
 
   /**
   * if multivalue is true then the forms input is required  
@@ -69,6 +70,7 @@ export class FormInput<T> {
       disabled?: boolean;
       selected?: boolean;
       notVisible?: boolean;
+      createVariable?: any;
 
     } = {}
   ) {
@@ -95,7 +97,7 @@ export class FormInput<T> {
     this.selected = options.selected || false;
     this.disabled = options.disabled || false;
     this.notVisible = options.notVisible || false;
-
+    this.createVariable = options.createVariable || null;
   }
 }
 

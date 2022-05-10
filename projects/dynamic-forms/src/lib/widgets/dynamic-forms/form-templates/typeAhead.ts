@@ -9,7 +9,6 @@ import { FormInput } from "../schema/form-input";
 
 export class TypeAhead extends FormInput<string> {
   controlType = "typeahead";
-  createVariable?: Function;
 }
 
 

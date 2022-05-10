@@ -12,12 +12,14 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'textbox'">
-      <label class="form-label" [attr.for]="inputsField?.key" *ngIf="!inputsField?.labelHidden">
+      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
+        [attr.for]="inputsField?.key" *ngIf="!inputsField?.labelHidden">
         {{inputsField?.label}}
         <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
       </label>
       <input [type]="inputsField?.type" [formControlName]="inputsField?.key" [placeholder]="inputsField?.label"
-        [id]="inputsField?.key" [name]="inputsField?.label" class="form-control">
+        [id]="inputsField?.key" [name]="inputsField?.label" class=""
+        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':'form-control'">
 
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
@@ -34,12 +36,14 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'textarea'">
-      <label class="form-label" [attr.for]="inputsField?.key">
+      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
+        [attr.for]="inputsField?.key">
         {{inputsField?.label}}
         <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
       </label>
       <textarea [formControlName]="inputsField?.key" rows="4" [formGroup]="form" [placeholder]="inputsField?.label"
-        [id]="inputsField?.key" [name]="inputsField?.label" class="form-control"></textarea>
+        [id]="inputsField?.key" [name]="inputsField?.label"
+        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':'form-control'"></textarea>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
@@ -54,12 +58,14 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'typeahead'">
-      <label class="form-label" for="{{inputsField?.key}}">
+      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
+        for="{{inputsField?.key}}">
         {{inputsField?.label}}
         <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
       </label>
       <type-ahead [value]="inputsField?.value" (valueChange)="valueInput($event);" [type]="inputsField?.type"
-        [inputField]="inputsField" [form]="form" [values]="inputsField?.options">
+        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':''" [inputField]="inputsField" [form]="form"
+        [values]="inputsField?.options">
       </type-ahead>
 
       <ng-container *ngIf="!isValid && isTouched">
@@ -79,12 +85,14 @@
     -->
 
     <ng-container *ngSwitchCase="'dropdown'">
-      <label class="form-label" [attr.for]="inputsField?.key">
+      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
+        [attr.for]="inputsField?.key">
         {{inputsField?.label}}
         <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
       </label>
       <ux-select [formControlName]="inputsField?.key" [multiple]="inputsField?.multiValue" [clearButton]="true"
-        [allowNull]="true" [key]="'id'" [value]="inputsField?.value" [display]="'name'" [options]="inputsField?.options"
+        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':''" [allowNull]="true" [key]="'id'"
+        [value]="inputsField?.value" [display]="'name'" [options]="inputsField?.options"
         placeholder="{{inputsField?.label}}"></ux-select>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>

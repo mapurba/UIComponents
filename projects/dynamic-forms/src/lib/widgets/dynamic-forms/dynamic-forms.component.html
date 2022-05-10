@@ -3,71 +3,78 @@
 * (c) Copyright 2022 Micro Focus or one of its affiliates.
 * ========================================================================
 -->
-<form (ngSubmit)="submit(form)" [formGroup]="form">
+<form (ngSubmit)="submit(form)" [formGroup]="form" #formdiv>
   <div class="form-group-validate">
     <ng-container *ngFor="let inputField of _inputFields;let i = index;">
       <ng-container *ngIf="inputField?.form">
-        <label class="form-label" [attr.for]="inputField?.key">
-          {{inputField?.label}}
-          <span *ngIf="inputField?.required" class="form-control-validation">*</span>
-        </label>
-        <div class=" form-table m-t-sm" [id]="inputField?.key">
-          <div class="btn-container">
-            <button type="button" (click)="addControls(inputField.key)" class="btn btn-icon btn-link button-secondary "
-              title="Add">
-              <i class=" ux-icon ux-icon-add"></i>
-            </button>
-            <button type="button" class="btn btn-icon btn-link button-secondary delete" [disabled]="selection.length<=0"
-              (click)="removeMultipleControls(inputField.key)" title="Delete">
-              <i class=" ux-icon ux-icon-trash"></i>
-            </button>
-          </div>
-          <table class="v-table  multi-value" aria-multiselectable="true" [formArrayName]="inputField.key">
-            <thead>
-              <tr>
-                <th class="checkbox-column">
-                  <ux-checkbox aria-label="Toggle selection of all rows"
-                    (valueChange)="$event ? select.selectAll() : select.deselectAll()">
-                  </ux-checkbox>
-                </th>
-                <th *ngFor="let item of inputField?.form; let i = index"> {{item?.label}} </th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody #select="ux-selection" [(uxSelection)]="selection" [clickSelection]="false">
-              <tr *ngFor="let item of form.controls[inputField.key]['controls']; let i = index;" [formGroupName]="i"
-                [uxSelectionItem]="{item:item,i:i}" [(selected)]="item.selected">
-                <td class="checkbox-column">
-                  <ux-checkbox aria-hidden="true" class="m-b-nil" [(value)]="item.selected">
-                  </ux-checkbox>
-                </td>
-                <td class="m-sm" *ngFor="let col of inputField?.form"
-                  [formGroup]="form.controls[inputField.key]['controls'][i]">
-                  <form-renderer [inputsField]="col" (inputFieldsChange)="emitChangeEvent($event)"
-                    [form]="form.controls[inputField.key]['controls'][i]">
-                  </form-renderer>
-                </td>
-                <td class="action">
-                  <button type="button" class="btn btn-icon  btn-link button-secondary ux-focus-indicator"
-                    aria-label="Delete" title="{{'Delete'}}" uxTooltip="Delete"
-                    (click)="removeControls(inputField.key,i)" uxHoverAction>
-                    <i class=" ux-icon ux-icon-close"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <ng-container *ngIf="!form['controls'][inputField?.key]?.valid && form['controls'][inputField?.key]?.touched">
-          <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
-          <span class="validation-error-text">Required -
-            {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+        <div [ngClass]="setinlineForm?'form-group form-inline-group':''">
+          <label class="form-label" [ngClass]="setinlineForm?'col-xs-6 col-sm-3 col-md-2':''"
+            [attr.for]="inputField?.key">
             {{inputField?.label}}
-          </span>
-        </ng-container>
+            <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+          </label>
+          <div class=" form-table m-t-sm" [ngClass]="setinlineForm?'col-xs-6 col-sm-9 col-md-10':'p-a-0'"
+            [id]="inputField?.key">
+            <div class="btn-container">
+              <button type="button" (click)="addControls(inputField.key)"
+                class="btn btn-icon btn-link button-secondary " title="Add">
+                <i class=" ux-icon ux-icon-add"></i>
+              </button>
+              <button type="button" class="btn btn-icon btn-link button-secondary delete"
+                [disabled]="selection.length<=0" (click)="removeMultipleControls(inputField.key)" title="Delete">
+                <i class=" ux-icon ux-icon-trash"></i>
+              </button>
+            </div>
+            <table class="v-table  multi-value" aria-multiselectable="true" [formArrayName]="inputField.key">
+              <thead>
+                <tr>
+                  <th class="checkbox-column">
+                    <ux-checkbox aria-label="Toggle selection of all rows"
+                      (valueChange)="$event ? select.selectAll() : select.deselectAll()">
+                    </ux-checkbox>
+                  </th>
+                  <th *ngFor="let item of inputField?.form; let i = index"> {{item?.label}} </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody #select="ux-selection" [(uxSelection)]="selection" [clickSelection]="false">
+                <tr *ngFor="let item of form.controls[inputField.key]['controls']; let i = index;" [formGroupName]="i"
+                  [uxSelectionItem]="{item:item,i:i}" [(selected)]="item.selected">
+                  <td class="checkbox-column">
+                    <ux-checkbox aria-hidden="true" class="m-b-nil" [(value)]="item.selected">
+                    </ux-checkbox>
+                  </td>
+                  <td class="m-sm" *ngFor="let col of inputField?.form"
+                    [formGroup]="form.controls[inputField.key]['controls'][i]">
+                    <form-renderer [inputsField]="col" (inputFieldsChange)="emitChangeEvent($event)"
+                      [form]="form.controls[inputField.key]['controls'][i]">
+                    </form-renderer>
+                  </td>
+                  <td class="action">
+                    <button type="button" class="btn btn-icon  btn-link button-secondary ux-focus-indicator"
+                      aria-label="Delete" title="{{'Delete'}}" uxTooltip="Delete"
+                      (click)="removeControls(inputField.key,i)" uxHoverAction>
+                      <i class=" ux-icon ux-icon-close"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <ng-container
+              *ngIf="!form['controls'][inputField?.key]?.valid && form['controls'][inputField?.key]?.touched">
+              <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+              <span class="validation-error-text">Required -
+                {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+                {{inputField?.label}}
+              </span>
+            </ng-container>
+          </div>
+        </div>
       </ng-container>
-      <ng-container *ngIf="!inputField.form">
-        <form-renderer [inputsField]="_inputFields[i]" (inputFieldsChange)="emitChangeEvent($event)" [form]="form">
+      <ng-container *ngIf="!inputField?.hidden && !inputField?.form">
+        <form-renderer [inputsField]="_inputFields[i]" (inputFieldsChange)="emitChangeEvent($event)" [form]="form"
+          [inlineFormElements]="setinlineForm"
+          [ngClass]="setinlineForm?'form-group form-inline-group':'form-twoline-group'">
         </form-renderer>
       </ng-container>
     </ng-container>
