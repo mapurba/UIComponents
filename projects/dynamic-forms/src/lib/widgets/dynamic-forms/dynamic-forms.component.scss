@@ -3,12 +3,22 @@
     grid-template-columns: max-content max-content;
     column-gap: 6rem;
 } */
-@import "~@netiq/ias-bootstrap/dist/ias-bootstrap.min.css";
+@import "~@netiq/dynamic-forms/dist/dynamic-forms.css";
 $color_1: dimgrey;
 
 
-$spaceamounts: (0, 2, 4, 8, 12, 16, 20, 24);
-$sides: ("a": "",
+$spaceamounts: (
+    0,
+    2,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24
+);
+$sides: (
+    "a": "",
     "t": "top",
     "b": "bottom",
     "l": "left",
@@ -145,4 +155,13 @@ form>.form-group-validate button {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.flex-layout-inputs {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 10px;
+    form-renderer{
+        flex-grow: 1;
+    }
 }

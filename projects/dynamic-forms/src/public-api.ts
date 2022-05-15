@@ -15,6 +15,7 @@ export * from "./lib/widgets/dynamic-forms/form-templates/dropdown";
 export * from "./lib/widgets/dynamic-forms/form-templates/radio";
 export * from "./lib/widgets/dynamic-forms/form-templates/typeAhead";
 export * from "./lib/widgets/dynamic-forms/form-templates/multiValue";
+export * from "./lib/widgets/dynamic-forms/form-templates/layout";
 export * from './lib/widgets/dynamic-forms/schema/form-input';
 
 

@@ -29,6 +29,12 @@ export class DynamicFormsControlService {
         group[form.key] = new FormArray(defaultValue || []);
         group[form.key].patchValue(form.value || {});
       }
+      else if (form.controlType == "layout") {
+        form.form.forEach(element => {
+          if (element?.required) element.validator = [Validators.required, ...form.validator || []];
+          group[element.key] = (element?.validator?.length > 0) ? (new FormControl({ value: element.value, disabled: element?.disabled || false } || '', element.validator)) : (new FormControl({ value: element.value, disabled: element?.disabled || false } || ''));
+        });
+      }
       else {
         if (form?.required) form.validator = [Validators.required, ...form.validator || []];
         group[form.key] = (form?.validator?.length > 0) ? (new FormControl({ value: form.value, disabled: form?.disabled || false } || '', form.validator)) : (new FormControl({ value: form.value, disabled: form?.disabled || false } || ''));
