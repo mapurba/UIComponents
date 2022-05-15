@@ -1,7 +1,7 @@
 # UIComponents
 
 #Demo
-https://dynamic-components.github.io/dynamic-forms/all
+https://dynamic-components.github.io/#/dynamic-forms/all
 
 
 #Simple Dynamic forms.
