@@ -3,8 +3,8 @@
 * (c) Copyright 2022 Micro Focus or one of its affiliates.
 * ========================================================================
 -->
-<ng-container *ngIf="!inputsField?.hidden" [formGroup]="form">
-  <ng-container [ngSwitch]="inputsField?.controlType">
+<ng-container *ngIf="!inputField?.hidden" [formGroup]="form">
+  <ng-container [ngSwitch]="inputField?.controlType">
 
     <!-- 
     =========================================================================================================================
@@ -12,20 +12,20 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'textbox'">
-      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
-        [attr.for]="inputsField?.key" *ngIf="!inputsField?.labelHidden">
-        {{inputsField?.label}}
-        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
+        [attr.for]="inputField?.key" *ngIf="!inputField?.labelHidden">
+        {{inputField?.label}}
+        <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <input [type]="inputsField?.type" [formControlName]="inputsField?.key" [placeholder]="inputsField?.label"
-        [id]="inputsField?.key" [name]="inputsField?.label" class=""
+      <input [type]="inputField?.type" [formControlName]="inputField?.key" [placeholder]="inputField?.label"
+        [id]="inputField?.key" [name]="inputField?.label" class=""
         [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':'form-control'">
 
-      <ng-container *ngIf="!isValid && isTouched">
+      <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden" >
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
-          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
-          {{inputsField?.label}}</span>
+          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+          {{inputField?.label}}</span>
       </ng-container>
     </ng-container>
 
@@ -36,19 +36,19 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'textarea'">
-      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
-        [attr.for]="inputsField?.key">
-        {{inputsField?.label}}
-        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
+        [attr.for]="inputField?.key">
+        {{inputField?.label}}
+        <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <textarea [formControlName]="inputsField?.key" rows="4" [formGroup]="form" [placeholder]="inputsField?.label"
-        [id]="inputsField?.key" [name]="inputsField?.label"
+      <textarea [formControlName]="inputField?.key" rows="4" [formGroup]="form" [placeholder]="inputField?.label"
+        [id]="inputField?.key" [name]="inputField?.label"
         [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':'form-control'"></textarea>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
-          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
-          {{inputsField?.label}}</span>
+          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+          {{inputField?.label}}</span>
       </ng-container>
     </ng-container>
 
@@ -58,21 +58,21 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'typeahead'">
-      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
-        for="{{inputsField?.key}}">
-        {{inputsField?.label}}
-        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
+        for="{{inputField?.key}}">
+        {{inputField?.label}}
+        <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <type-ahead [value]="inputsField?.value" (valueChange)="valueInput($event);" [type]="inputsField?.type"
-        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':''" [inputField]="inputsField" [form]="form"
-        [values]="inputsField?.options">
+      <type-ahead [value]="inputField?.value" (valueChange)="valueInput($event);" [type]="inputField?.type"
+        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':''" [inputField]="inputField" [form]="form"
+        [values]="inputField?.options">
       </type-ahead>
 
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
-          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
-          {{inputsField?.label}}</span>
+          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+          {{inputField?.label}}</span>
       </ng-container>
     </ng-container>
 
@@ -85,20 +85,20 @@
     -->
 
     <ng-container *ngSwitchCase="'dropdown'">
-      <label class="form-label" [ngClass]="inlineFormElements?'col-xs-6 col-sm-3 col-md-2':''"
-        [attr.for]="inputsField?.key">
-        {{inputsField?.label}}
-        <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
+        [attr.for]="inputField?.key">
+        {{inputField?.label}}
+        <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <ux-select [formControlName]="inputsField?.key" [multiple]="inputsField?.multiValue" [clearButton]="true"
-        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':''" [allowNull]="true" [key]="'id'"
-        [value]="inputsField?.value" [display]="'name'" [options]="inputsField?.options"
-        placeholder="{{inputsField?.label}}"></ux-select>
+      <ux-select [formControlName]="inputField?.key" [multiple]="inputField?.multiValue" [clearButton]="true"
+        [ngClass]="inlineFormElements?'flex-input':''" [allowNull]="true" [key]="'id'"
+        [value]="inputField?.value" [display]="'name'" [options]="inputField?.options"
+        placeholder="{{inputField?.label}}"></ux-select>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
-          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
-          {{inputsField?.label}}
+          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+          {{inputField?.label}}
         </span>
       </ng-container>
 
@@ -114,22 +114,22 @@
 
     <ng-container *ngSwitchCase="'checkbox'">
       <label class="ias-checkbox">
-        <input type="checkbox" [value]="inputsField?.value" [disabled]="inputsField?.disabled"
-          [formControlName]="inputsField?.key">
+        <input type="checkbox" [value]="inputField?.value" [disabled]="inputField?.disabled"
+          [formControlName]="inputField?.key">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32"
           class=" ias-icon ias-icon-check_thick " viewBox="0 0 32 32">
           <title>m_check</title>
           <path d="M12.124 26.084l-8.791-8.791 1.253-1.253 7.538 7.533 16.48-16.484 1.258 1.258z" />
         </svg>
-        <span>{{inputsField.label}}
-          <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+        <span>{{inputField.label}}
+          <span *ngIf="inputField?.required" class="form-control-validation">*</span>
         </span>
       </label>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
-          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
-          {{inputsField?.label}}
+          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+          {{inputField?.label}}
         </span>
       </ng-container>
     </ng-container>
@@ -142,25 +142,25 @@
     -->
 
     <ng-container *ngSwitchCase="'radio'">
-      <ng-container *ngFor="let opt of inputsField?.options">
+      <ng-container *ngFor="let opt of inputField?.options">
         <label class="ias-radio-button">
-          <input type="radio" value="{{opt.id}}" [disabled]="inputsField?.disabled"
-            [formControlName]="inputsField?.key">
+          <input type="radio" value="{{opt.id}}" [disabled]="inputField?.disabled"
+            [formControlName]="inputField?.key">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32"
             class=" ias-icon ias-icon-check_thick " viewBox="0 0 32 32">
             <title>check</title>
             <path d="M12.124 26.084l-8.791-8.791 1.253-1.253 7.538 7.533 16.48-16.484 1.258 1.258z" />
           </svg>
           <span>{{opt?.name||opt?.id}}
-            <span *ngIf="inputsField?.required" class="form-control-validation">*</span>
+            <span *ngIf="inputField?.required" class="form-control-validation">*</span>
           </span>
         </label>
       </ng-container>
       <ng-container *ngIf="!isValid && (isTouched || isDirty)">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
-          {{( form.controls[inputsField?.key].errors)? 'valid':'' }}
-          {{inputsField?.label}}
+          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+          {{inputField?.label}}
         </span>
       </ng-container>
     </ng-container>
@@ -172,8 +172,8 @@
     -->
 
 
-    <div class="input-group w-100" *ngSwitchCase="'richText'" class="{{inputsField?.key}}">
-      <form-ace-editor (change)="valueInput($event);" [file]="inputsField?.value" [type]="inputsField?.type">
+    <div class="input-group w-100" *ngSwitchCase="'richText'" class="{{inputField?.key}}">
+      <form-ace-editor (change)="valueInput($event);" [file]="inputField?.value" [type]="inputField?.type">
       </form-ace-editor>
     </div>
 

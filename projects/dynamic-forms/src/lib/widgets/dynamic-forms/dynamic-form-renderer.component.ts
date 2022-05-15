@@ -16,57 +16,42 @@ import { FormInput } from './schema/form-input';
 })
 export class DynamicFormRendererComponent implements OnInit {
 
-  @Input() inputsField: FormInput<string>;
-  @Output() inputFieldsChange?: EventEmitter<any> = new EventEmitter<any>();
+  @Input() inputField: FormInput<string>;
+  @Output() inputFieldChange?: EventEmitter<any> = new EventEmitter<any>();
   @Input() form: FormGroup;
   @Input() inlineFormElements?: boolean = false;
-  // get isValid() {
-  //   let value = this.form?.controls[this.inputsField.key].value, isvalid = true;
-  //   if (this.inputsField.validate != undefined) {
-  //     this.inputsField.validate.forEach((fun) => {
-  //       let { valid, errorMsg } = fun(value);
-  //       this.inputsField['errorMsg'] = errorMsg;
-  //       if (!valid) {
-  //         this.form.controls[this.inputsField.key].setErrors({ 'errorMsg': true });
-  //         isvalid = false;
-  //       }
-  //     });
-  //   }
-
-  //   return this.form.controls[this.inputsField.key].valid && isvalid;
-  // }
 
   get isTouched() {
-    return this.form?.controls[this.inputsField.key].touched;
+    return this.form?.controls[this.inputField.key].touched;
   }
 
   get isValid() {
-    return this.form?.controls[this.inputsField.key].valid;
+    return this.form?.controls[this.inputField.key].valid;
   }
   get isDirty() {
-    return this.form?.controls[this.inputsField.key].dirty;
+    return this.form?.controls[this.inputField.key].dirty;
   }
 
   get formField(): FormControl {
-    return this.form?.controls[this.inputsField.key] as FormControl;
+    return this.form?.controls[this.inputField.key] as FormControl;
   }
 
-  public errs() { return this.form?.controls[this.inputsField.key].getError('errorMsg'); }
+  public errs() { return this.form?.controls[this.inputField.key].getError('errorMsg'); }
 
   public valueInput(value) {
 
-    if (this.form.controls[this.inputsField.key].valid && value) {
-      this.form.controls[this.inputsField.key].setValue(value);
-      this.form.controls[this.inputsField.key].markAsTouched();
+    if (this.form.controls[this.inputField.key].valid && value) {
+      this.form.controls[this.inputField.key].setValue(value);
+      this.form.controls[this.inputField.key].markAsTouched();
     }
   }
 
-  currentFormFieldValue() { return this.form.controls[this.inputsField.key].value; }
+  currentFormFieldValue() { return this.form.controls[this.inputField.key].value; }
 
   ngOnInit(): void {
 
-    this.form?.controls[this.inputsField.key].valueChanges.subscribe((res) => {
-      this.form.valid && (this.form.touched || this.form.dirty) ? this.inputFieldsChange.emit(this.inputsField) : false;
+    this.form?.controls[this.inputField.key].valueChanges.subscribe((res) => {
+      this.form.valid && (this.form.touched || this.form.dirty) ? this.inputFieldChange.emit(this.inputField) : false;
     });
   }
 
@@ -74,13 +59,6 @@ export class DynamicFormRendererComponent implements OnInit {
   setSelected() {
 
   }
-  print(val) {
-    console.log(val);
-  }
-
-
-
-
 
 
 }

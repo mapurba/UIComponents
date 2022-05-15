@@ -8,6 +8,7 @@
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
+import { debounce, delay, interval, of, Subject, throttle } from 'rxjs';
 import { VariableService } from '../utils/Variable.service';
 import { DynamicFormsControlService } from './dynamic-forms-control.service';
 import { FormInput } from './schema/form-input';
@@ -20,6 +21,16 @@ import { FormInput } from './schema/form-input';
 })
 export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
+  @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>();
+  @Output() currentValue: EventEmitter<any> = new EventEmitter<any>();
+  @Output() isFormValid?: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() hideSubmit: boolean = false;
+  @Input() disabled?: boolean = false;
+  @Input() inlineFormElements?: boolean = false;
+  @Input() virtualScroller?: boolean = false;
+  @Input() form?: FormGroup;
+  @ViewChild('formdiv') formdiv: ElementRef;
+
   public _inputFields: FormInput<string>[];
   @Input("inputFields")
   set inputFields(val: FormInput<string>[]) {
@@ -30,19 +41,10 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
     this.form.valid ? this.isFormValid.emit(true) : this.isFormValid.emit(false);
     this.form.valid ? this.emitFormCurrentEvent() : false;
   }
-  @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>();
-  @Output() currentValue?: EventEmitter<any> = new EventEmitter<any>();
-  @Output() statusEvent?: EventEmitter<any> = new EventEmitter<any>();
-  @Output() isFormValid?: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() hideSubmit: boolean = false;
-  @Input() disabled?: boolean = false;
-  @Input() inlineFormElements?: boolean = false;
-  @Input() virtualScroller?: boolean = false;
-  @Input() form?: FormGroup;
-  @ViewChild('formdiv') formdiv: ElementRef;
 
-  setinlineForm = false;
 
+  formValue: Subject<any> = new Subject<any>();
+  setinlineForm = false;a
   // multiValue form selection
   selection: any[] = [];
   payLoad = '';
@@ -71,6 +73,8 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
     this.setinlineForm = this.inlineFormElements;
+    this.formValue.pipe(debounce(() => interval(1000))).subscribe(value => this.currentValue.emit(value));
+
   }
 
   submit(form) {
@@ -80,7 +84,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
 
   emitFormCurrentEvent() {
-    this.currentValue.emit(this.payLoad);
+    this.formValue.next(this.payLoad);
   }
 
 
@@ -94,6 +98,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
     let form = field ? field.form : null;
     form.map((field) => {
       field.value = '';
+      field.touched = true;
       field.order = (this.form.get(control) as FormArray).length;
     })
     if (form)
@@ -122,19 +127,5 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   getFormConrtols(key) {
     return Array.from(this.form.get(key)['controls']);
   }
-  print(val) {
-    console.log(val);
-  }
+
 }
-
-// class CustomSelection extends SelectionStrategy {
-//   constructor(private _ngZone: NgZone, private _cdr: ChangeDetectorRef) {
-//     super();
-//   }
-//   onChange(event) {
-//     this._ngZone.run(() => this._cdr.markForCheck());
-//   }
-//   click(event: MouseEvent, data: any): void {
-
-//   }
-// }

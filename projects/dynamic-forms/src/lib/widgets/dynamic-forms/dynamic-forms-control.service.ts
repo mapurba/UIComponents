@@ -38,6 +38,8 @@ export class DynamicFormsControlService {
       else {
         if (form?.required) form.validator = [Validators.required, ...form.validator || []];
         group[form.key] = (form?.validator?.length > 0) ? (new FormControl({ value: form.value, disabled: form?.disabled || false } || '', form.validator)) : (new FormControl({ value: form.value, disabled: form?.disabled || false } || ''));
+        if (form.touched)
+          group[form.key].markAsTouched();
       }
     });
     return new FormGroup(group);

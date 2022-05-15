@@ -47,7 +47,7 @@
                     </td>
                     <td class="m-sm" *ngFor="let col of inputField?.form"
                       [formGroup]="form.controls[inputField.key]['controls'][i]">
-                      <form-renderer [inputsField]="col" (inputFieldsChange)="emitChangeEvent($event)"
+                      <form-renderer [inputField]="col" (inputFieldChange)="emitChangeEvent($event)"
                         [form]="form.controls[inputField.key]['controls'][i]">
                       </form-renderer>
                     </td>
@@ -76,10 +76,10 @@
           <div class="flex-layout-inputs" [ngClass]="inputField.classNames">
             <ng-container *ngFor="let field of inputField.form;let i = index;">
               <ng-container *ngIf="!field?.hidden && !field?.form">
-                <form-renderer [inputsField]="field" (inputFieldsChange)="emitChangeEvent($event)"
+                <form-renderer [inputField]="field" (inputFieldChange)="emitChangeEvent($event)"
                   class="{{field?.classNames}} flex-layout-inputs-{{inputField?.key}}-{{i}}" [form]="form"
                   [inlineFormElements]="setinlineForm"
-                  [ngClass]="setinlineForm?'form-group form-inline-group':'form-twoline-group'">
+                  [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group'">
                 </form-renderer>
               </ng-container>
             </ng-container>
@@ -87,14 +87,13 @@
         </ng-container>
         <ng-container *ngSwitchDefault>
           <ng-container *ngIf="!inputField?.hidden && !inputField?.form">
-            <form-renderer [inputsField]="_inputFields[i]" (inputFieldsChange)="emitChangeEvent($event)" [form]="form"
-              [inlineFormElements]="setinlineForm"
-              [ngClass]="setinlineForm?'form-group form-inline-group':'form-twoline-group'">
+            <form-renderer [inputField]="_inputFields[i]" (inputFieldChange)="emitChangeEvent($event)" [form]="form"
+              [inlineFormElements]="setinlineForm" 
+              [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group'">
             </form-renderer>
           </ng-container>
         </ng-container>
       </ng-container>
-
     </ng-container>
     <!-- custom submit button -->
     <ng-content></ng-content>
