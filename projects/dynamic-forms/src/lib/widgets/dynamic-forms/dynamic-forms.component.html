@@ -16,13 +16,14 @@
             </label>
             <div class=" form-table m-t-sm" [ngClass]="setinlineForm?'col-xs-6 col-sm-9 col-md-10':'p-a-0'"
               [id]="inputField?.key">
-              <div class="btn-container">
+              <div class="btn-container p-b-8">
                 <button type="button" (click)="addControls(inputField.key)"
                   class="btn btn-icon btn-link button-secondary " title="Add">
                   <i class=" ux-icon ux-icon-add"></i>
                 </button>
                 <button type="button" class="btn btn-icon btn-link button-secondary delete"
-                  [disabled]="selection.length<=0" (click)="removeMultipleControls(inputField.key)" title="Delete">
+                  [disabled]="inputField?.selection?.length<=0" (click)="removeMultipleControls(inputField)"
+                  title="Delete">
                   <i class=" ux-icon ux-icon-trash"></i>
                 </button>
               </div>
@@ -30,15 +31,15 @@
                 <thead>
                   <tr>
                     <th class="checkbox-column">
-                      <ux-checkbox aria-label="Toggle selection of all rows"
-                        (valueChange)="$event ? select.selectAll() : select.deselectAll()">
+                      <ux-checkbox aria-label="Toggle selection of all rows" [value]="getSelectAll(inputField)"
+                        (valueChange)="$event ? select.selectAll() : select.deselectAll();">
                       </ux-checkbox>
                     </th>
                     <th *ngFor="let item of inputField?.form; let i = index"> {{item?.label}} </th>
                     <th></th>
                   </tr>
                 </thead>
-                <tbody #select="ux-selection" [(uxSelection)]="selection" [clickSelection]="false">
+                <tbody #select="ux-selection" [(uxSelection)]="inputField.selection" [clickSelection]="false">
                   <tr *ngFor="let item of form.controls[inputField.key]['controls']; let i = index;" [formGroupName]="i"
                     [uxSelectionItem]="{item:item,i:i}" [(selected)]="item.selected">
                     <td class="checkbox-column">
@@ -88,7 +89,7 @@
         <ng-container *ngSwitchDefault>
           <ng-container *ngIf="!inputField?.hidden && !inputField?.form">
             <form-renderer [inputField]="_inputFields[i]" (inputFieldChange)="emitChangeEvent($event)" [form]="form"
-              [inlineFormElements]="setinlineForm" 
+              [inlineFormElements]="setinlineForm"
               [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group'">
             </form-renderer>
           </ng-container>

@@ -3,7 +3,6 @@
     grid-template-columns: max-content max-content;
     column-gap: 6rem;
 } */
-@import "~@netiq/dynamic-forms/dist/dynamic-forms.css";
 $color_1: dimgrey;
 
 
@@ -58,20 +57,6 @@ $sides: (
 
 
 
-.checkbox-column {
-    vertical-align: bottom;
-    padding-bottom: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.action {
-    @extend .checkbox-column;
-    padding: 0;
-}
-
-
 // custom table css 
 .v-table {
     border-collapse: collapse;
@@ -83,18 +68,24 @@ $sides: (
     thead {
         tr {
             th {
-                text-align: center;
                 padding-bottom: 8px;
+                text-align: left !important;
             }
 
             .checkbox-column {
+                padding: 4px;
                 text-align: left !important;
+            }
+            ::ng-deep ux-checkbox {
+                .ux-checkbox {
+                    margin-top: 0;
+                }
             }
         }
     }
 
     td {
-        padding: 8px 10px 0px 10px;
+        padding: 4px;
 
         span {
             color: $color_1;
@@ -107,23 +98,29 @@ $sides: (
             top: 0;
             left: 0;
         }
+
+        ::ng-deep ux-checkbox {
+            .ux-checkbox {
+                margin-top: 0;
+            }
+        }
+
+        &.checkbox-column {
+            padding: 4px 0px 4px 4px;
+            text-align: left;
+        }
     }
 
     td.action {
-        display: flex;
-        align-items: baseline;
+        padding: 4px 0px;
     }
 
     tr {
-        vertical-align: middle;
+       
         border-bottom: 1px solid #cdd1d5;
     }
 }
 
-td.checkbox-column {
-    padding: 10px 0px !important;
-    vertical-align: middle;
-}
 
 form>.form-group-validate {
     display: grid;
@@ -144,7 +141,7 @@ form>.form-group-validate button {
 }
 
 .action>.btn {
-    margin-top: 8px !important;
+    margin-top: 0px !important;
 }
 
 ::ng-deep form>.form-group-validate {
@@ -161,10 +158,18 @@ form>.form-group-validate button {
     display: flex;
     align-items: flex-start;
     column-gap: 10px;
-    form-renderer{
+
+    form-renderer {
         flex-grow: 1;
     }
 }
-.d-flex{
+
+.d-flex {
     display: flex;
+}
+
+::ng-deep.ux-checkbox.ux-checkbox-indeterminate>.ux-checkbox-container {
+    background-color: #f2f6f9 !important;
+    color: #2196f3 !important;
+    border-color: #2196f3 !important;
 }

@@ -44,7 +44,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
 
   formValue: Subject<any> = new Subject<any>();
-  setinlineForm = false;a
+  setinlineForm = false; a
   // multiValue form selection
   selection: any[] = [];
   payLoad = '';
@@ -88,6 +88,16 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   }
 
 
+  getSelectAll(control: FormInput<any>): boolean | -1 {
+    if (control?.selection?.length === 0) {
+      return false;
+    }
+    if (control?.selection?.length === this.form.controls[control.key]['controls'].length) {
+      return true;
+    }
+    return -1;
+  }
+
 
   clearData() {
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
@@ -109,12 +119,13 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
     array.removeAt(index);
   }
 
-  removeMultipleControls(control: string) {
-    if (this.selection.length <= 0) return;
-    let array = this.form.get(control) as FormArray;
-    this.selection.map((item) => {
+  removeMultipleControls(control: FormInput<any>) {
+    if (control.selection.length <= 0) return;
+    let array = this.form.get(control.key) as FormArray;
+    control.selection.map((item) => {
       array.removeAt(item.i);
     });
+    control.selection = [];
   }
 
 
@@ -126,6 +137,10 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
   getFormConrtols(key) {
     return Array.from(this.form.get(key)['controls']);
+  }
+
+  print(event) {
+    console.log(event)
   }
 
 }

@@ -12,8 +12,8 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'textbox'">
-      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
-        [attr.for]="inputField?.key" *ngIf="!inputField?.labelHidden">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key"
+        *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
@@ -21,7 +21,7 @@
         [id]="inputField?.key" [name]="inputField?.label" class=""
         [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':'form-control'">
 
-      <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden" >
+      <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
@@ -36,8 +36,7 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'textarea'">
-      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
-        [attr.for]="inputField?.key">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
@@ -58,8 +57,7 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'typeahead'">
-      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
-        for="{{inputField?.key}}">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" for="{{inputField?.key}}">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
@@ -85,15 +83,13 @@
     -->
 
     <ng-container *ngSwitchCase="'dropdown'">
-      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''"
-        [attr.for]="inputField?.key">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
       <ux-select [formControlName]="inputField?.key" [multiple]="inputField?.multiValue" [clearButton]="true"
-        [ngClass]="inlineFormElements?'flex-input':''" [allowNull]="true" [key]="'id'"
-        [value]="inputField?.value" [display]="'name'" [options]="inputField?.options"
-        placeholder="{{inputField?.label}}"></ux-select>
+        [ngClass]="inlineFormElements?'flex-input':''" [allowNull]="true" [key]="'id'" [value]="inputField?.value"
+        [display]="'name'" [options]="inputField?.options" placeholder="{{inputField?.label}}"></ux-select>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
@@ -116,11 +112,7 @@
       <label class="ias-checkbox">
         <input type="checkbox" [value]="inputField?.value" [disabled]="inputField?.disabled"
           [formControlName]="inputField?.key">
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32"
-          class=" ias-icon ias-icon-check_thick " viewBox="0 0 32 32">
-          <title>m_check</title>
-          <path d="M12.124 26.084l-8.791-8.791 1.253-1.253 7.538 7.533 16.48-16.484 1.258 1.258z" />
-        </svg>
+        <i class="ias-icon ias-icon-check_thick ux-icon ux-icon-active"></i>
         <span>{{inputField.label}}
           <span *ngIf="inputField?.required" class="form-control-validation">*</span>
         </span>
@@ -144,13 +136,8 @@
     <ng-container *ngSwitchCase="'radio'">
       <ng-container *ngFor="let opt of inputField?.options">
         <label class="ias-radio-button">
-          <input type="radio" value="{{opt.id}}" [disabled]="inputField?.disabled"
-            [formControlName]="inputField?.key">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32"
-            class=" ias-icon ias-icon-check_thick " viewBox="0 0 32 32">
-            <title>check</title>
-            <path d="M12.124 26.084l-8.791-8.791 1.253-1.253 7.538 7.533 16.48-16.484 1.258 1.258z" />
-          </svg>
+          <input type="radio" value="{{opt.id}}" [disabled]="inputField?.disabled" [formControlName]="inputField?.key">
+          <i class="ias-icon ias-icon-check_thick ux-icon ux-icon-active"></i>
           <span>{{opt?.name||opt?.id}}
             <span *ngIf="inputField?.required" class="form-control-validation">*</span>
           </span>
