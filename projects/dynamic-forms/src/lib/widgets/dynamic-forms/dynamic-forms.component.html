@@ -8,14 +8,12 @@
     <ng-container *ngFor="let inputField of _inputFields;let i = index;">
       <ng-container [ngSwitch]="inputField?.controlType">
         <ng-container *ngSwitchCase="'multivalue'">
-          <div [ngClass]="setinlineForm?'form-group form-inline-group':''">
-            <label class="form-label" [ngClass]="setinlineForm?'col-xs-6 col-sm-3 col-md-2':''"
-              [attr.for]="inputField?.key">
+          <div [ngClass]="setinlineForm?'form-group form-inline-group d-flex':''">
+            <label class="form-label" [ngClass]="setinlineForm?'flex-label':''" [attr.for]="inputField?.key">
               {{inputField?.label}}
               <span *ngIf="inputField?.required" class="form-control-validation">*</span>
             </label>
-            <div class=" form-table " [ngClass]="setinlineForm?'col-xs-6 col-sm-9 col-md-10':'p-a-0'"
-              [id]="inputField?.key">
+            <div [ngClass]="setinlineForm?'flex-input':' form-table p-a-0'" [id]="inputField?.key">
               <div class="btn-container">
                 <button type="button" (click)="addControls(inputField.key)"
                   class="btn btn-icon btn-link button-secondary " title="Add">
@@ -31,7 +29,8 @@
                 <thead>
                   <tr>
                     <th class="checkbox-column">
-                      <ux-checkbox aria-label="Toggle selection of all rows" [value]="getSelectAll(inputField)"
+                      <ux-checkbox aria-label="Toggle selection of all rows" [id]="inputField?.key+'header'"
+                        [value]="getSelectAll(inputField)"
                         (valueChange)="$event ? select.selectAll() : select.deselectAll();">
                       </ux-checkbox>
                     </th>
@@ -43,7 +42,8 @@
                   <tr *ngFor="let item of form.controls[inputField.key]['controls']; let i = index;" [formGroupName]="i"
                     [uxSelectionItem]="{item:item,i:i}" [(selected)]="item.selected">
                     <td class="checkbox-column">
-                      <ux-checkbox aria-hidden="true" class="m-b-nil" [(value)]="item.selected">
+                      <ux-checkbox aria-hidden="true" class="m-b-nil" [(value)]="item.selected"
+                        [id]="inputField?.key+'-'+i">
                       </ux-checkbox>
                     </td>
                     <td class="m-sm" *ngFor="let col of inputField?.form"

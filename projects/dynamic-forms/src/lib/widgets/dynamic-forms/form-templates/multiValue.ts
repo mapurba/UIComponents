@@ -7,4 +7,5 @@ import { FormInput } from "../schema/form-input";
 
 export class MultiValue extends FormInput<string> {
   controlType = 'multivalue';
+  selection = [];
 }

@@ -6,18 +6,15 @@
 $color_1: dimgrey;
 
 
-$spaceamounts: (
-    0,
+$spaceamounts: (0,
     2,
     4,
     8,
     12,
     16,
     20,
-    24
-);
-$sides: (
-    "a": "",
+    24);
+$sides: ("a": "",
     "t": "top",
     "b": "bottom",
     "l": "left",
@@ -73,7 +70,7 @@ $sides: (
     thead {
         tr {
             th {
-                padding-bottom: 8px;
+                padding: 4px 4px 8px 4px;
                 text-align: left !important;
             }
 
@@ -119,6 +116,7 @@ $sides: (
 
     td.action {
         padding: 4px 0px;
+        width: 32px;
     }
 
     tr {
@@ -131,12 +129,9 @@ $sides: (
 form>.form-group-validate {
     display: grid;
     grid-template-columns: auto;
+    row-gap: 16px;
 }
 
-::ng-deep form>.form-group-validate label,
-form>.form-group-validate button {
-    margin-top: 14px;
-}
 
 ::ng-deep form>.form-group-validate button {
     justify-self: end;
@@ -188,4 +183,16 @@ form>.form-group-validate button {
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
+}
+
+
+::ng-deep form>.form-group-validate .form-control {}
+
+::ng-deep form>.form-group-validate .form-control.ng-invalid.ng-dirty,
+form>.form-group-validate .form-control.ng-invalid.ng-touched {
+    border: 1px solid #ff454f !important;
+}
+
+::ng-deep .form-group {
+    margin-bottom: 0;
 }

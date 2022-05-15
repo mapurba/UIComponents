@@ -90,3 +90,8 @@
 ::ng-deep .ux-tag {
   font-size: 14px;
 }
+
+.form-group-validate input.ng-invalid.ng-dirty,
+.form-group-validate input.ng-invalid.ng-touched {
+  border: 1px solid #ff454f !important;
+}
