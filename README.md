@@ -1,27 +1,61 @@
 # UIComponents
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
+#Demo
+https://dynamic-components.github.io/dynamic-forms/all
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#Simple Dynamic forms.
 
-## Code scaffolding
+# Form json
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ ```  import { Component, OnInit } from '@angular/core';
+  import { TextArea, Textbox } from 'dynamic-forms';
+  
+  export class FormsComponent implements OnInit {
 
-## Build
+    inputfields: any[] = [
+      new Textbox({
+        key: "Name",
+        label: "Name",
+        type: "text",
+        value: '',
+        required: true,
+      }),
+      new TextArea({
+        key: "Discription",
+        label: "Description",
+        type: "text",
+        value: '',
+        required: false,
+      })
+    ];
+    
+    submit(value: string) {
+      console.log(JSON.parse(value));
+    }
+  }
+``` 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+ 
+  # Template
+```
+<dynamic-forms [inputFields]="inputfields" (submit)="submit($event)">
+  <div class=" btn-container m-t-md">
+    <button type="submit" class="btn-primary btn">
+      Save
+    </button>
+    <button type="button" class="js-details-target btn">
+      Cancel
+    </button>
+  </div>
+</dynamic-forms>
+```
 
-## Running unit tests
+#module 
+```
+import { DynamicFormModule } from 'dynamic-forms';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  imports: [
+    DynamicFormModule 
+  ],
+```
