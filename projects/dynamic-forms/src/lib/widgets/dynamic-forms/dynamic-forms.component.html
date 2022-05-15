@@ -14,9 +14,9 @@
               {{inputField?.label}}
               <span *ngIf="inputField?.required" class="form-control-validation">*</span>
             </label>
-            <div class=" form-table m-t-sm" [ngClass]="setinlineForm?'col-xs-6 col-sm-9 col-md-10':'p-a-0'"
+            <div class=" form-table " [ngClass]="setinlineForm?'col-xs-6 col-sm-9 col-md-10':'p-a-0'"
               [id]="inputField?.key">
-              <div class="btn-container p-b-8">
+              <div class="btn-container">
                 <button type="button" (click)="addControls(inputField.key)"
                   class="btn btn-icon btn-link button-secondary " title="Add">
                   <i class=" ux-icon ux-icon-add"></i>

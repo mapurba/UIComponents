@@ -18,8 +18,8 @@
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
       <input [type]="inputField?.type" [formControlName]="inputField?.key" [placeholder]="inputField?.label"
-        [id]="inputField?.key" [name]="inputField?.label" class=""
-        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':'form-control'">
+        [id]="inputField?.key" [name]="inputField?.label" class="form-control"
+        [ngClass]="inlineFormElements?'flex-input ':''">
 
       <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
@@ -40,9 +40,9 @@
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <textarea [formControlName]="inputField?.key" rows="4" [formGroup]="form" [placeholder]="inputField?.label"
+      <textarea [formControlName]="inputField?.key" rows="4" class="form-control" [formGroup]="form" [placeholder]="inputField?.label"
         [id]="inputField?.key" [name]="inputField?.label"
-        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':'form-control'"></textarea>
+        [ngClass]="inlineFormElements?'flex-input ':'form-control'"></textarea>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
@@ -61,11 +61,11 @@
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <type-ahead [value]="inputField?.value" (valueChange)="valueInput($event);" [type]="inputField?.type"
-        [ngClass]="inlineFormElements?'col-xs-6  col-sm-9 col-md-10 ':''" [inputField]="inputField" [form]="form"
+      <type-ahead [value]="inputField?.value"  (valueChange)="valueInput($event);" [type]="inputField?.type"
+        [ngClass]="inlineFormElements?'flex-input ':''" [inputField]="inputField" [form]="form"
         [values]="inputField?.options">
       </type-ahead>
-
+ 
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -

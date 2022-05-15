@@ -70,9 +70,23 @@
 }
 
 .flex-label {
-  flex-grow: 1;
+  flex: 1;
+  margin-top: 0px;
+  margin: 0;
+  align-items: center;
+  display: flex;
+
+  .form-control-validation {
+    padding-left: 4px;
+  }
 }
 
 .flex-input {
-  flex-grow: 1;
+  flex: 4;
+  margin: 0;
+  align-items: center;
+}
+
+::ng-deep .ux-tag {
+  font-size: 14px;
 }
