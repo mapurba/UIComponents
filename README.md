@@ -4,6 +4,13 @@
 https://dynamic-components.github.io/#/dynamic-forms/all
 
 
+#Install 
+```
+npm i @netiq/dynamic-forms 
+```
+
+
+
 #Simple Dynamic forms.
 
 # Form json
