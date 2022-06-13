@@ -1,11 +1,20 @@
 {
   "name": "@netiq/uicomponents",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapurba/UIComponents.git"
+  },
+  "contributors": [
+    "Apurba Mondal <apurba.mondal@microfocus.com> (https://github.com/mapurba/)"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/mapurba/UIComponents/issues",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "watch": "ng build --watch --configuration production",
+    "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,

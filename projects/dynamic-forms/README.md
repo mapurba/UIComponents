@@ -1,24 +1,61 @@
 # DynamicForms
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+#Demo
+https://dynamic-components.github.io/#/dynamic-forms/all
 
-## Code scaffolding
+#Simple Dynamic forms.
 
-Run `ng generate component component-name --project dynamic-forms` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project dynamic-forms`.
-> Note: Don't forget to add `--project dynamic-forms` or else it will be added to the default project in your `angular.json` file. 
+# Form json
 
-## Build
+```import { Component, OnInit } from '@angular/core';
+ import { TextArea, Textbox } from 'dynamic-forms';
 
-Run `ng build dynamic-forms` to build the project. The build artifacts will be stored in the `dist/` directory.
+ export class FormsComponent implements OnInit {
 
-## Publishing
+   inputfields: any[] = [
+     new Textbox({
+       key: "Name",
+       label: "Name",
+       type: "text",
+       value: '',
+       required: true,
+     }),
+     new TextArea({
+       key: "Discription",
+       label: "Description",
+       type: "text",
+       value: '',
+       required: false,
+     })
+   ];
 
-After building your library with `ng build dynamic-forms`, go to the dist folder `cd dist/dynamic-forms` and run `npm publish`.
+   submit(value: string) {
+     console.log(JSON.parse(value));
+   }
+ }
+```
 
-## Running unit tests
+# Template
 
-Run `ng test dynamic-forms` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+<dynamic-forms [inputFields]="inputfields" (submit)="submit($event)">
+  <div class=" btn-container m-t-md">
+    <button type="submit" class="btn-primary btn">
+      Save
+    </button>
+    <button type="button" class="js-details-target btn">
+      Cancel
+    </button>
+  </div>
+</dynamic-forms>
+```
 
-## Further help
+#module
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+import { DynamicFormModule } from 'dynamic-forms';
+
+  imports: [
+    DynamicFormModule
+  ],
+```

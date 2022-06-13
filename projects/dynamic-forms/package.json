@@ -1,9 +1,18 @@
 {
   "name": "@netiq/dynamic-forms",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapurba/UIComponents.git"
+  },
+  "contributors": [
+    "Apurba Mondal <apurba.mondal@microfocus.com> (https://github.com/mapurba/)"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/mapurba/UIComponents/issues",
   "peerDependencies": {
-    "@angular/common": "^13.3.0",
-    "@angular/core": "^13.3.0"
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0",

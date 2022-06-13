@@ -5,14 +5,12 @@
 */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { AceEditorComponent } from './ace-editor/ace-editor.component';
 import { DynamicFormRendererComponent } from './dynamic-forms/dynamic-form-renderer.component';
 import { DynamicFormsComponent } from './dynamic-forms/dynamic-forms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SelectModule, TypeaheadModule, CheckboxModule, SelectionModule, TableModule } from '@ux-aspects/ux-aspects';
 import { TypeAheadComponent } from './dynamic-forms/form-templates/elements/type-ahead/type-ahead.component';
 import { AceEditorComponent } from './ace-editor/ace-editor.component';
-
+import { CheckboxModule, SelectionModule, SelectModule, TableModule, TypeaheadModule } from '@ux-aspects/ux-aspects';
 
 @NgModule({
   declarations: [

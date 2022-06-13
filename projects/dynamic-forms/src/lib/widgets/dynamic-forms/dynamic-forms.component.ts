@@ -112,10 +112,12 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
     })
     if (form)
       (this.form.get(control) as FormArray).push(this.dfcs.toFormGroup(form));
+    this.emitChangeEvent(null);
   }
   removeControls(control: string, index) {
     let array = this.form.get(control) as FormArray;
     array.removeAt(index);
+    this.emitChangeEvent(null);
   }
 
   removeMultipleControls(control: FormInput<any>) {
@@ -125,6 +127,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
       array.removeAt(item.i);
     });
     control.selection = [];
+    this.emitChangeEvent(null);
   }
 
 

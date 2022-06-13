@@ -40,7 +40,7 @@ export class DynamicFormRendererComponent implements OnInit {
 
   public valueInput(value) {
 
-    if (this.form.controls[this.inputField.key].valid && value) {
+    if (this.form.controls[this.inputField.key].valid) {
       this.form.controls[this.inputField.key].setValue(value);
       this.form.controls[this.inputField.key].markAsTouched();
     }
