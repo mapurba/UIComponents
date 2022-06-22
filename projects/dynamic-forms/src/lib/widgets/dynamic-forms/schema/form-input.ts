@@ -27,7 +27,8 @@ export class FormInput<T> {
   notVisible?: boolean;
   errorMsg?: string;
   createVariable?: any;
-  selection?:any[];
+  selection?: any[];
+  actionButtons?: ActionButtons[];
 
   /**
   * if multivalue is true then the forms input is required  
@@ -72,7 +73,7 @@ export class FormInput<T> {
       selected?: boolean;
       notVisible?: boolean;
       createVariable?: any;
-      selection?:any[];
+      selection?: any[];
 
     } = {}
   ) {
@@ -105,3 +106,11 @@ export class FormInput<T> {
 }
 
 
+
+export class ActionButtons {
+  name: string;
+  className: string;
+  callBack: [];
+  disabled: boolean;
+  hidden: boolean;
+}

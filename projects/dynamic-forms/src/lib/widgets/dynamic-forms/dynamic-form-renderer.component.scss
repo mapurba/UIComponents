@@ -95,3 +95,15 @@
 .form-group-validate input.ng-invalid.ng-touched {
   border: 1px solid #ff454f !important;
 }
+
+.form-title {
+  border-top: 1px solid #f1f2f3;
+  padding-top: 8px;
+  margin: 0;
+  font-size: inherit;
+  width: 100%;
+}
+
+label.ias-checkbox.flex-input {
+  padding-left: 8px;
+}

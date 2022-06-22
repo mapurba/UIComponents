@@ -6,15 +6,18 @@
 $color_1: dimgrey;
 
 
-$spaceamounts: (0,
+$spaceamounts: (
+    0,
     2,
     4,
     8,
     12,
     16,
     20,
-    24);
-$sides: ("a": "",
+    24
+);
+$sides: (
+    "a": "",
     "t": "top",
     "b": "bottom",
     "l": "left",
@@ -195,4 +198,8 @@ form>.form-group-validate .form-control.ng-invalid.ng-touched {
 
 ::ng-deep .form-group {
     margin-bottom: 0;
+}
+
+label.form-label.flex-label {
+    align-items: flex-start;
 }

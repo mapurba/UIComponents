@@ -17,6 +17,8 @@ export * from "./lib/widgets/dynamic-forms/form-templates/typeAhead";
 export * from "./lib/widgets/dynamic-forms/form-templates/multiValue";
 export * from "./lib/widgets/dynamic-forms/form-templates/layout";
 export * from './lib/widgets/dynamic-forms/schema/form-input';
+export * from './lib/widgets/dynamic-forms/form-templates/title';
+
 
 
 

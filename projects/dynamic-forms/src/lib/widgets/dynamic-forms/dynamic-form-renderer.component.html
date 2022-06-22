@@ -40,8 +40,8 @@
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <textarea [formControlName]="inputField?.key" rows="4" class="form-control" [formGroup]="form" [placeholder]="inputField?.label"
-        [id]="inputField?.key" [name]="inputField?.label"
+      <textarea [formControlName]="inputField?.key" rows="4" class="form-control" [formGroup]="form"
+        [placeholder]="inputField?.label" [id]="inputField?.key" [name]="inputField?.label"
         [ngClass]="inlineFormElements?'flex-input ':'form-control'"></textarea>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
@@ -61,17 +61,23 @@
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <type-ahead [value]="inputField?.value"  (valueChange)="valueInput($event);" [type]="inputField?.type"
+      <type-ahead [value]="inputField?.value" (valueChange)="valueInput($event);" [type]="inputField?.type"
         [ngClass]="inlineFormElements?'flex-input ':''" [inputField]="inputField" [form]="form"
         [values]="inputField?.options">
       </type-ahead>
- 
+
+      <ng-container>
+
+      </ng-container>
+
+
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
           {{inputField?.label}}</span>
       </ng-container>
+
     </ng-container>
 
 
@@ -109,7 +115,8 @@
 
 
     <ng-container *ngSwitchCase="'checkbox'">
-      <label class="ias-checkbox">
+      <span *ngIf="inlineFormElements" [ngClass]="inlineFormElements?'flex-label':''"></span>
+      <label class="ias-checkbox" [ngClass]="inlineFormElements?'flex-input ':''">
         <input type="checkbox" [value]="inputField?.value" [disabled]="inputField?.disabled"
           [formControlName]="inputField?.key">
         <i class="ias-icon ias-icon-check_thick ux-icon ux-icon-active"></i>
@@ -163,6 +170,20 @@
       <form-ace-editor (change)="valueInput($event);" [file]="inputField?.value" [type]="inputField?.type">
       </form-ace-editor>
     </div>
+
+
+
+
+    <!-- 
+    =========================================================================================================================
+     Title  
+    =========================================================================================================================
+    -->
+
+    <ng-container *ngSwitchCase="'title'">
+      <h3 class="form-title" [ngClass]="inputField?.classNames">{{inputField?.label}}</h3>
+    </ng-container>
+
 
   </ng-container>
 
