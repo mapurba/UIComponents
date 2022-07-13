@@ -32,11 +32,46 @@
 
     <!-- 
     =========================================================================================================================
+      Tag input  box accpets text 
+    =========================================================================================================================
+    -->
+    <ng-container *ngSwitchCase="'tagInput'">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key"
+        *ngIf="!inputField?.labelHidden">
+        {{inputField?.label}}
+        <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+      </label>
+      <div>
+        <ux-tag-input #tagInput [(input)]="inputField.input" [id]="inputField?.key" [formControlName]="inputField?.key"
+          [addOnPaste]=true [enforceTagLimits]="inputField?.required" [placeholder]="inputField?.label"
+          [tagDelimiters]="''" class="form-control tag-input" [ngClass]="inlineFormElements?'flex-input ':''"
+          [disabled]="inputField?.disabled" [enforceTagLimits]="inputField?.enforceTagLimits"
+          [freeInput]="inputField?.freeInput" [minTags]="inputField?.minLength" [maxTags]="inputField?.maxLength"
+          [placeholder]="inputField?.placeholder" [showTypeaheadOnClick]="inputField?.showTypeaheadOnClick"
+          [tagDelimiters]="inputField?.tagDelimiters">
+          <ux-typeahead *ngIf="!!inputField?.enableTypeahead" [filter]="inputField?.input"
+            [options]="inputField?.options" [dropDirection]="'down'" [multiselectable]="!!inputField?.multiselectable">
+          </ux-typeahead>
+        </ux-tag-input>
+        <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden && !!inputField?.required ">
+          <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+          <span class="validation-error-text">Required -
+            {{( form.controls[inputField?.key].errors)? 'valid':'' }}
+            {{inputField?.label}}</span>
+        </ng-container>
+      </div>
+
+    </ng-container>
+
+
+    <!-- 
+    =========================================================================================================================
       Textarea
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'textarea'">
-      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key"
+        *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
@@ -57,7 +92,8 @@
     =========================================================================================================================
     -->
     <ng-container *ngSwitchCase="'typeahead'">
-      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" for="{{inputField?.key}}">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" for="{{inputField?.key}}"
+        *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
@@ -89,7 +125,8 @@
     -->
 
     <ng-container *ngSwitchCase="'dropdown'">
-      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key">
+      <label class="form-label" [ngClass]="inlineFormElements?'flex-label':''" [attr.for]="inputField?.key"
+        *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
@@ -186,6 +223,12 @@
 
 
   </ng-container>
+</ng-container>
 
-
+<ng-container *ngFor="let action of inputField?.actionButtons">
+  <button type="button" class="btn btn-link btn-icon button-secondary form-action-btn" [title]="action?.name"
+    (click)="action.callBack({form,inputField})" [ngClass]="action?.className">
+    <i *ngIf="action?.iconClass" [ngClass]="action?.iconClass"></i>
+    {{action?.iconClass==''?action?.name:''}}
+  </button>
 </ng-container>

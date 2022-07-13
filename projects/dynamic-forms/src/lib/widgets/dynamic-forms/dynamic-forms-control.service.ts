@@ -10,11 +10,15 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormInput } from './schema/form-input';
 
 
-@Injectable()
+@Injectable(
+  {
+    providedIn: 'root'
+  }
+)
 export class DynamicFormsControlService {
   constructor() { }
 
-  toFormGroup(formItems: FormInput<string>[], disabled = false) {
+  public toFormGroup(formItems: FormInput<string>[], disabled = false) {
     const group: any = {};
 
     formItems.forEach((form: any) => {
@@ -45,7 +49,7 @@ export class DynamicFormsControlService {
     return new FormGroup(group);
   }
 
-  addControls(control: string, formItems: FormInput<string>[]) {
+  public addControls(control: string, formItems: FormInput<string>[]) {
     let fields: any = formItems.find((q) => q.key == control);
     let form = fields ? fields.form : null;
     return this.toFormGroup(form);

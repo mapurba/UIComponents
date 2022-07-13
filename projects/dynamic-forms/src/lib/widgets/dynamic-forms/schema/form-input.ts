@@ -18,7 +18,7 @@ export class FormInput<T> {
   enableIcon?: boolean;
   iconPrefix?: string;
   classNames?: string;
-  options: { id: string; name: string }[];
+  options: { id: string; name: string }[] | string[];
   dropDown: { multi?: boolean, size: number, flat?: boolean };
   validator?: any[];
   selected?: boolean;
@@ -61,7 +61,7 @@ export class FormInput<T> {
       iconPrefix?: string;
       enableIcon?: boolean;
       classNames?: string;
-      options?: { id: any; name: string }[];
+      options?: { id: any; name: string }[] | string[];
       icon?: string;
       dropDown?: { multi: boolean, size: number, flat?: boolean };
       validator?: any[];
@@ -74,6 +74,7 @@ export class FormInput<T> {
       notVisible?: boolean;
       createVariable?: any;
       selection?: any[];
+      actionButtons?: ActionButtons[];
 
     } = {}
   ) {
@@ -102,6 +103,7 @@ export class FormInput<T> {
     this.notVisible = options.notVisible || false;
     this.createVariable = options.createVariable || null;
     this.selection = options.selection || null;
+    this.actionButtons = options.actionButtons || null;
   }
 }
 
@@ -110,7 +112,8 @@ export class FormInput<T> {
 export class ActionButtons {
   name: string;
   className: string;
-  callBack: [];
+  callBack: Function;
   disabled: boolean;
   hidden: boolean;
+  iconClass: string;
 }

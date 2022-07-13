@@ -31,9 +31,9 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   @Input() form?: FormGroup;
   @ViewChild('formdiv') formdiv: ElementRef;
 
-  public _inputFields: FormInput<string>[];
+  public _inputFields: FormInput<any>[];
   @Input("inputFields")
-  set inputFields(val: FormInput<string>[]) {
+  set inputFields(val: FormInput<any>[]) {
     this._inputFields = val;
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
 
@@ -72,7 +72,9 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
     this.setinlineForm = this.inlineFormElements;
-    this.formValue.pipe(debounce(() => interval(1000))).subscribe(value => this.currentValue.emit(value));
+    this.formValue.pipe(debounce(() => interval(1000))).subscribe((value) => {
+      this.currentValue.emit(JSON.stringify(this.form.getRawValue()))
+    });
 
   }
 

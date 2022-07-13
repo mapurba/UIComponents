@@ -49,7 +49,7 @@
                     <td class="m-sm" *ngFor="let col of inputField?.form"
                       [formGroup]="form.controls[inputField.key]['controls'][i]">
                       <form-renderer [inputField]="col" (inputFieldChange)="emitChangeEvent($event)"
-                        [form]="form.controls[inputField.key]['controls'][i]">
+                        [ngClass]="col?.classNames" [form]="form.controls[inputField.key]['controls'][i]">
                       </form-renderer>
                     </td>
                     <td class="action">
@@ -80,7 +80,7 @@
                 <form-renderer [inputField]="field" (inputFieldChange)="emitChangeEvent($event)"
                   class="{{field?.classNames}} flex-layout-inputs-{{inputField?.key}}-{{i}}" [form]="form"
                   [inlineFormElements]="setinlineForm"
-                  [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group'">
+                  [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group' + field?.classNames">
                 </form-renderer>
               </ng-container>
             </ng-container>
@@ -89,8 +89,8 @@
         <ng-container *ngSwitchDefault>
           <ng-container *ngIf="!inputField?.hidden && !inputField?.form">
             <form-renderer [inputField]="_inputFields[i]" (inputFieldChange)="emitChangeEvent($event)" [form]="form"
-              [inlineFormElements]="setinlineForm"
-              [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group'">
+              [inlineFormElements]="setinlineForm" class="{{inputField?.classNames}}"
+              [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group' + inputField?.classNames">
             </form-renderer>
           </ng-container>
         </ng-container>

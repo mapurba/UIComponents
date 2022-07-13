@@ -18,6 +18,8 @@ export * from "./lib/widgets/dynamic-forms/form-templates/multiValue";
 export * from "./lib/widgets/dynamic-forms/form-templates/layout";
 export * from './lib/widgets/dynamic-forms/schema/form-input';
 export * from './lib/widgets/dynamic-forms/form-templates/title';
+export * from './lib/widgets/dynamic-forms/form-templates/tagInput';
+export { DynamicFormsControlService } from './lib/widgets/dynamic-forms/dynamic-forms-control.service';
 
 
 

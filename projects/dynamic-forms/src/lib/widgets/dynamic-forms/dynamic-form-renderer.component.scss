@@ -107,3 +107,20 @@
 label.ias-checkbox.flex-input {
   padding-left: 8px;
 }
+
+.tag-input {
+  display: flex;
+  padding: 0;
+  height: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: inner-spin-button !important;
+  margin: 0;
+}
+
+
+.form-action-btn {
+  align-self: center;
+}

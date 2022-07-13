@@ -5,7 +5,7 @@
 */
 
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Type } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormInput } from './schema/form-input';
 
@@ -16,7 +16,7 @@ import { FormInput } from './schema/form-input';
 })
 export class DynamicFormRendererComponent implements OnInit {
 
-  @Input() inputField: FormInput<string>;
+  @Input() inputField: FormInput<any> | any;
   @Output() inputFieldChange?: EventEmitter<any> = new EventEmitter<any>();
   @Input() form: FormGroup;
   @Input() inlineFormElements?: boolean = false;
