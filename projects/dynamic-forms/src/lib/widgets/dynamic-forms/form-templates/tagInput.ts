@@ -30,7 +30,7 @@ export class TagInput extends FormInput<any> {
             hidden?: boolean;
             iconPrefix?: string;
             classNames?: string;
-            options?: string[];
+            options?: any;
             icon?: string;
             validator?: any[];
             errorMsg?: any;
@@ -68,7 +68,7 @@ export class TagInput extends FormInput<any> {
         this.maxLength = options.maxLength || 10;
         this.minLength = options.minLength || 1;
         this.freeInput = !!options.freeInput
-        this.tagDelimiters = options.tagDelimiters || ',';
+        this.tagDelimiters = options.tagDelimiters;
         this.enforceTagLimits = !!options.enforceTagLimits;
         this.multiselectable = !!options.multiselectable;
         this.placeholder = options.placeholder || options.label;

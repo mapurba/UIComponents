@@ -50,7 +50,8 @@
           [placeholder]="inputField?.placeholder" [showTypeaheadOnClick]="inputField?.showTypeaheadOnClick"
           [tagDelimiters]="inputField?.tagDelimiters">
           <ux-typeahead *ngIf="!!inputField?.enableTypeahead" [filter]="inputField?.input"
-            [options]="inputField?.options" [dropDirection]="'down'" [multiselectable]="!!inputField?.multiselectable">
+            [options]="inputField?.options|async" [dropDirection]="'down'"
+            [multiselectable]="!!inputField?.multiselectable">
           </ux-typeahead>
         </ux-tag-input>
         <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden && !!inputField?.required ">

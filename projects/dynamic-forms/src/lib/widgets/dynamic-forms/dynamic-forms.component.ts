@@ -5,11 +5,9 @@
 */
 
 
-import { FocusOrigin } from '@angular/cdk/a11y';
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { debounce, delay, interval, of, Subject, throttle } from 'rxjs';
-import { VariableService } from '../utils/Variable.service';
+import { debounce, interval, Subject, } from 'rxjs';
 import { DynamicFormsControlService } from './dynamic-forms-control.service';
 import { FormInput } from './schema/form-input';
 
@@ -36,14 +34,14 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   set inputFields(val: FormInput<any>[]) {
     this._inputFields = val;
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
-
-    this.payLoad = JSON.stringify(this.form.getRawValue());
-    this.form.valid ? this.isFormValid.emit(true) : this.isFormValid.emit(false);
+    this.formValue.pipe(debounce(() => interval(1000))).subscribe((value) => {
+      this.currentValue.emit(JSON.stringify(this.form.getRawValue()))
+    });
   }
 
 
   formValue: Subject<any> = new Subject<any>();
-  setinlineForm = false; a
+  setinlineForm = false;
   // multiValue form selection
   selection: any[] = [];
   payLoad = '';
@@ -72,10 +70,6 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
     this.setinlineForm = this.inlineFormElements;
-    this.formValue.pipe(debounce(() => interval(1000))).subscribe((value) => {
-      this.currentValue.emit(JSON.stringify(this.form.getRawValue()))
-    });
-
   }
 
   submit(form) {
@@ -116,6 +110,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
       (this.form.get(control) as FormArray).push(this.dfcs.toFormGroup(form));
     this.emitChangeEvent(null);
   }
+
   removeControls(control: string, index) {
     let array = this.form.get(control) as FormArray;
     array.removeAt(index);
@@ -124,11 +119,13 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
   removeMultipleControls(control: FormInput<any>) {
     if (control.selection.length <= 0) return;
-    let array = this.form.get(control.key) as FormArray;
+
+    control.selection.sort((prev: any, cur: any) => { return cur.i - prev.i });
+    const array = this.form.get(control.key) as FormArray;
     control.selection.map((item) => {
       array.removeAt(item.i);
     });
-    control.selection = [];
+    control.selection.length = 0;
     this.emitChangeEvent(null);
   }
 

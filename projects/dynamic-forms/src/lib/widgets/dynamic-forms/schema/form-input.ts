@@ -18,7 +18,7 @@ export class FormInput<T> {
   enableIcon?: boolean;
   iconPrefix?: string;
   classNames?: string;
-  options: { id: string; name: string }[] | string[];
+  options: { id: string; name: string }[] | string[] | Promise<any>;
   dropDown: { multi?: boolean, size: number, flat?: boolean };
   validator?: any[];
   selected?: boolean;
