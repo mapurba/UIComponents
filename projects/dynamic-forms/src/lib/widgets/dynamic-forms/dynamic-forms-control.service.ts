@@ -7,6 +7,7 @@
 
 import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { VariableService } from '../utils/Variable.service';
 import { FormInput } from './schema/form-input';
 
 
@@ -24,7 +25,7 @@ export class DynamicFormsControlService {
     formItems.forEach((form: any) => {
       if (disabled)
         form.disabled = disabled
-
+      form.guid = VariableService.S4();
       if (form.controlType == "multivalue") {
         let defaultValue = [];
         form.value.forEach(element => {

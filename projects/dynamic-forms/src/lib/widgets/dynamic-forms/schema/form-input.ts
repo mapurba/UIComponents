@@ -5,6 +5,7 @@
 */
 
 export class FormInput<T> {
+  guid: any;
   value: any;
   key: any;
   label?: string;

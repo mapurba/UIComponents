@@ -124,3 +124,9 @@ input::-webkit-inner-spin-button {
 .form-action-btn {
   align-self: center;
 }
+
+::ng-deep .tag-input {
+  ol {
+    width: 100%;
+  }
+}

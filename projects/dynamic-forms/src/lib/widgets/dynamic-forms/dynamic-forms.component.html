@@ -29,7 +29,7 @@
                 <thead>
                   <tr>
                     <th class="checkbox-column">
-                      <ux-checkbox aria-label="Toggle selection of all rows" [id]="inputField?.key+'header'"
+                      <ux-checkbox aria-label="Toggle selection of all rows" [id]="inputField?.key+'-'+inputField?.guid"
                         [value]="getSelectAll(inputField)"
                         (valueChange)="$event ? select.selectAll() : select.deselectAll();">
                       </ux-checkbox>
@@ -43,7 +43,7 @@
                     [uxSelectionItem]="{item:item,i:i}" [(selected)]="item.selected">
                     <td class="checkbox-column">
                       <ux-checkbox aria-hidden="true" class="m-b-nil" [(value)]="item.selected"
-                        [id]="inputField?.key+'-'+i">
+                        [id]="inputField?.key+'-'+inputField?.guid+'-'+i">
                       </ux-checkbox>
                     </td>
                     <td class="m-sm" *ngFor="let col of inputField?.form"

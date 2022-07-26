@@ -45,6 +45,7 @@ export class TagInput extends FormInput<any> {
             enforceTagLimits?: boolean;
             multiselectable?: boolean;
             placeholder?: string;
+            input?: any;
         }
     ) {
         super(options);
@@ -66,12 +67,13 @@ export class TagInput extends FormInput<any> {
         this.showTypeaheadOnClick = !!options.showTypeaheadOnClick;
         this.enableTypeahead = !!options.enableTypeahead;
         this.maxLength = options.maxLength || 10;
-        this.minLength = options.minLength || 1;
+        this.minLength = options.minLength || 0;
         this.freeInput = !!options.freeInput
         this.tagDelimiters = options.tagDelimiters;
         this.enforceTagLimits = !!options.enforceTagLimits;
         this.multiselectable = !!options.multiselectable;
         this.placeholder = options.placeholder || options.label;
+        this.input = options.input || [];
 
     }
 }
