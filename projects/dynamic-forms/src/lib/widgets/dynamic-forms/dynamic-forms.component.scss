@@ -203,3 +203,11 @@ form>.form-group-validate .form-control.ng-invalid.ng-touched {
 label.form-label.flex-label {
     align-items: flex-start;
 }
+
+::ng-deep .flex-layout-inputs {
+    form-renderer {
+        span.flex-label {
+            display: none;
+        }
+    }
+}

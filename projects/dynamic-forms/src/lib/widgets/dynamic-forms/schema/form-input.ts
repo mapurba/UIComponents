@@ -76,7 +76,7 @@ export class FormInput<T> {
       createVariable?: any;
       selection?: any[];
       actionButtons?: ActionButtons[];
-
+      inline?: boolean;
     } = {}
   ) {
     this.value = options.value;

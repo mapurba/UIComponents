@@ -50,7 +50,7 @@ export class DynamicFormRendererComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.form?.controls[this.inputField.key].valueChanges.subscribe((res) => {
+    this.form?.controls[this.inputField?.key]?.valueChanges.subscribe((res) => {
       this.form.valid && (this.form.touched || this.form.dirty) ? this.inputFieldChange.emit(this.inputField) : false;
     });
   }

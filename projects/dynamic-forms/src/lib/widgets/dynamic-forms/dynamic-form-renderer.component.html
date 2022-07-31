@@ -153,7 +153,7 @@
 
 
     <ng-container *ngSwitchCase="'checkbox'">
-      <span *ngIf="inlineFormElements" [ngClass]="inlineFormElements?'flex-label':''"></span>
+      <span *ngIf="inlineFormElements" class="flex-label"></span>
       <label class="ias-checkbox" [ngClass]="inlineFormElements?'flex-input ':''">
         <input type="checkbox" [value]="inputField?.value" [disabled]="inputField?.disabled"
           [formControlName]="inputField?.key">

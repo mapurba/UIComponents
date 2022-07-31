@@ -36,6 +36,7 @@ export class DynamicFormsControlService {
       }
       else if (form.controlType == "layout") {
         form.form.forEach(element => {
+          if (!element) return;
           if (element?.required) element.validator = [Validators.required, ...form.validator || []];
           group[element.key] = (element?.validator?.length > 0) ? (new FormControl({ value: element.value, disabled: element?.disabled || false } || '', element.validator)) : (new FormControl({ value: element.value, disabled: element?.disabled || false } || ''));
         });

@@ -27,6 +27,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   @Input() inlineFormElements?: boolean = false;
   @Input() virtualScroller?: boolean = false;
   @Input() form?: FormGroup;
+  @Input() debounce?: number = 100;
   @ViewChild('formdiv') formdiv: ElementRef;
 
   public _inputFields: FormInput<any>[];
@@ -34,7 +35,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   set inputFields(val: FormInput<any>[]) {
     this._inputFields = val;
     this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
-    this.formValue.pipe(debounce(() => interval(1000))).subscribe((value) => {
+    this.formValue.pipe(debounce(() => interval(this.debounce))).subscribe((value) => {
       this.currentValue.emit(JSON.stringify(this.form.getRawValue()))
     });
   }
@@ -119,13 +120,12 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
   removeMultipleControls(control: FormInput<any>) {
     if (control.selection.length <= 0) return;
-
     control.selection.sort((prev: any, cur: any) => { return cur.i - prev.i });
     const array = this.form.get(control.key) as FormArray;
     control.selection.map((item) => {
       array.removeAt(item.i);
     });
-    control.selection.length = 0;
+    control.selection = [];
     this.emitChangeEvent(null);
   }
 
