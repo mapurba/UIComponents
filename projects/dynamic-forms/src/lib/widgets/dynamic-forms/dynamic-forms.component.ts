@@ -126,6 +126,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
       array.removeAt(item.i);
     });
     control.selection = [];
+    this.form.markAsDirty();
     this.emitChangeEvent(null);
   }
 
@@ -133,7 +134,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   emitChangeEvent(event) {
     this.payLoad = JSON.stringify(this.form.getRawValue());
     this.form.valid ? this.isFormValid.emit(true) : this.isFormValid.emit(false);
-    this.form.valid && this.form.touched ? this.emitFormCurrentEvent() : false;
+    this.form.valid && this.form.dirty ? this.emitFormCurrentEvent() : false;
   }
 
   getFormConrtols(key) {
