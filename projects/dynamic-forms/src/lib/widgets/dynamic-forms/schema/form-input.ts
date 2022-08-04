@@ -30,7 +30,7 @@ export class FormInput<T> {
   createVariable?: any;
   selection?: any[];
   actionButtons?: ActionButtons[];
-
+  placeholder?: string;
   /**
   * if multivalue is true then the forms input is required  
   * cases:
@@ -77,6 +77,7 @@ export class FormInput<T> {
       selection?: any[];
       actionButtons?: ActionButtons[];
       inline?: boolean;
+      placeholder?: string;
     } = {}
   ) {
     this.value = options.value;
@@ -105,6 +106,7 @@ export class FormInput<T> {
     this.createVariable = options.createVariable || null;
     this.selection = options.selection || null;
     this.actionButtons = options.actionButtons || null;
+    this.placeholder = options.placeholder || '';
   }
 }
 

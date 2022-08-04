@@ -1,10 +1,9 @@
 <div [class.drop-direction-up]="dropDirection === 'up'">
   <div class="has-feedback">
     <div>
-      <input [(ngModel)]="value" [ngModelOptions]="{standalone: true}" *ngIf="type !== 'textarea'"
-        placeholder="{{inputField?.label}}" class="form-control" [type]="type" (click)="dropdownOpen = true"
-        (blur)="dropdownOpen = false" (keydown)="typeaheadKeyService.handleKey($event, typeahead)"
-        (keydown.escape)="dropdownOpen = false" />
+      <input [(ngModel)]="value" *ngIf="type !== 'textarea'" placeholder="{{inputField?.label}}" class="form-control"
+        [type]="type" (click)="dropdownOpen = true" (blur)="dropdownOpen = false"
+        (keydown)="typeaheadKeyService.handleKey($event, typeahead)" (keydown.escape)="dropdownOpen = false" />
 
       <textarea id="textarea-regular" [(ngModel)]="value" *ngIf="type === 'textarea'" (click)="dropdownOpen = true"
         (blur)="dropdownOpen = false" (keydown)="typeaheadKeyService.handleKey($event, typeahead)"

@@ -75,7 +75,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
   submit(form) {
     this.payLoad = JSON.stringify(this.form.getRawValue());
-    if (this.form?.valid && (this.form.touched || this.form.dirty)) { this.isFormValid.emit(true); this.onSubmit.emit(this.payLoad); }
+    if (this.form?.valid) { this.isFormValid.emit(true); this.onSubmit.emit(this.payLoad); }
   }
 
 

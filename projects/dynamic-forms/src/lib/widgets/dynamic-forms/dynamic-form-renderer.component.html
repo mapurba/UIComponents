@@ -17,9 +17,9 @@
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <input [type]="inputField?.type" [formControlName]="inputField?.key" [placeholder]="inputField?.label"
-        [id]="inputField?.key" [name]="inputField?.label" class="form-control"
-        [ngClass]="inlineFormElements?'flex-input ':''">
+      <input [type]="inputField?.type" [formControlName]="inputField?.key"
+        placeholder="{{inputField?.placeholder||inputField?.label}}" [id]="inputField?.key" [name]="inputField?.label"
+        class="form-control" [ngClass]="inlineFormElements?'flex-input ':''">
 
       <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
@@ -43,12 +43,12 @@
       </label>
       <div>
         <ux-tag-input #tagInput [(input)]="inputField.input" [id]="inputField?.key" [formControlName]="inputField?.key"
-          [addOnPaste]=true [enforceTagLimits]="inputField?.required" [placeholder]="inputField?.label"
-          [tagDelimiters]="''" class="form-control tag-input" [ngClass]="inlineFormElements?'flex-input ':''"
+          [addOnPaste]=true [enforceTagLimits]="inputField?.required" [tagDelimiters]="''"
+          class="form-control tag-input" [ngClass]="inlineFormElements?'flex-input ':''"
           [disabled]="inputField?.disabled" [enforceTagLimits]="inputField?.enforceTagLimits"
           [freeInput]="inputField?.freeInput" [minTags]="inputField?.minLength" [maxTags]="inputField?.maxLength"
-          [placeholder]="inputField?.placeholder" [showTypeaheadOnClick]="inputField?.showTypeaheadOnClick"
-          [tagDelimiters]="inputField?.tagDelimiters">
+          placeholder="{{inputField?.placeholder||inputField?.label}}"
+          [showTypeaheadOnClick]="inputField?.showTypeaheadOnClick" [tagDelimiters]="inputField?.tagDelimiters">
           <ux-typeahead *ngIf="!!inputField?.enableTypeahead" [filter]="inputField?.input"
             [options]="inputField?.options|async" [dropDirection]="'down'"
             [multiselectable]="!!inputField?.multiselectable">
@@ -77,7 +77,7 @@
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
       <textarea [formControlName]="inputField?.key" rows="4" class="form-control" [formGroup]="form"
-        [placeholder]="inputField?.label" [id]="inputField?.key" [name]="inputField?.label"
+        placeholder="{{inputField?.placeholder||inputField?.label}}" [id]="inputField?.key" [name]="inputField?.label"
         [ngClass]="inlineFormElements?'flex-input ':'form-control'"></textarea>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
@@ -98,7 +98,7 @@
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <type-ahead [value]="inputField?.value" (valueChange)="valueInput($event);" [type]="inputField?.type"
+      <type-ahead (valueChange)="valueInput($event);" [type]="inputField?.type" [formControlName]="inputField?.key"
         [ngClass]="inlineFormElements?'flex-input ':''" [inputField]="inputField" [form]="form"
         [values]="inputField?.options">
       </type-ahead>
@@ -133,7 +133,8 @@
       </label>
       <ux-select [formControlName]="inputField?.key" [multiple]="inputField?.multiValue" [clearButton]="true"
         [ngClass]="inlineFormElements?'flex-input':''" [allowNull]="true" [key]="'id'" [value]="inputField?.value"
-        [display]="'name'" [options]="inputField?.options" placeholder="{{inputField?.label}}"></ux-select>
+        [display]="'name'" [options]="inputField?.options" placeholder="{{inputField?.placeholder||inputField?.label}}">
+      </ux-select>
       <ng-container *ngIf="!isValid && isTouched">
         <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
         <span class="validation-error-text">Required -
