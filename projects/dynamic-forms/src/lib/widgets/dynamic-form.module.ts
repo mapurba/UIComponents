@@ -10,7 +10,7 @@ import { DynamicFormsComponent } from './dynamic-forms/dynamic-forms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TypeAheadComponent } from './dynamic-forms/form-templates/elements/type-ahead/type-ahead.component';
 import { AceEditorComponent } from './ace-editor/ace-editor.component';
-import { CheckboxModule, SelectionModule, SelectModule, TableModule, TagInputModule, TypeaheadModule } from '@ux-aspects/ux-aspects';
+import { AccessibilityModule, CheckboxModule, SelectionModule, SelectModule, TableModule, TagInputModule, TypeaheadModule } from '@ux-aspects/ux-aspects';
 import { DynamicFormsControlService } from './dynamic-forms/dynamic-forms-control.service';
 
 @NgModule({
@@ -29,7 +29,8 @@ import { DynamicFormsControlService } from './dynamic-forms/dynamic-forms-contro
     CheckboxModule,
     SelectionModule,
     TableModule,
-    TagInputModule
+    TagInputModule,
+    AccessibilityModule
   ],
   providers: [DynamicFormsControlService],
   exports: [

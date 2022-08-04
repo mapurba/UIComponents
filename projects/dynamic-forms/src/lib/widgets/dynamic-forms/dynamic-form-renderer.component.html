@@ -22,7 +22,7 @@
         class="form-control" [ngClass]="inlineFormElements?'flex-input ':''">
 
       <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden">
-        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
           {{inputField?.label}}</span>
@@ -55,7 +55,7 @@
           </ux-typeahead>
         </ux-tag-input>
         <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden && !!inputField?.required ">
-          <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+          <span></span>
           <span class="validation-error-text">Required -
             {{( form.controls[inputField?.key].errors)? 'valid':'' }}
             {{inputField?.label}}</span>
@@ -80,7 +80,7 @@
         placeholder="{{inputField?.placeholder||inputField?.label}}" [id]="inputField?.key" [name]="inputField?.label"
         [ngClass]="inlineFormElements?'flex-input ':'form-control'"></textarea>
       <ng-container *ngIf="!isValid && isTouched">
-        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
           {{inputField?.label}}</span>
@@ -109,7 +109,7 @@
 
 
       <ng-container *ngIf="!isValid && isTouched">
-        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
           {{inputField?.label}}</span>
@@ -136,7 +136,7 @@
         [display]="'name'" [options]="inputField?.options" placeholder="{{inputField?.placeholder||inputField?.label}}">
       </ux-select>
       <ng-container *ngIf="!isValid && isTouched">
-        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
           {{inputField?.label}}
@@ -164,7 +164,7 @@
         </span>
       </label>
       <ng-container *ngIf="!isValid && isTouched">
-        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
           {{inputField?.label}}
@@ -190,7 +190,7 @@
         </label>
       </ng-container>
       <ng-container *ngIf="!isValid && (isTouched || isDirty)">
-        <span class="validation-error-text hpe-icon hpe-alert form-control-feedback" aria-hidden="true"></span>
+        <span></span>
         <span class="validation-error-text">Required -
           {{( form.controls[inputField?.key].errors)? 'valid':'' }}
           {{inputField?.label}}
