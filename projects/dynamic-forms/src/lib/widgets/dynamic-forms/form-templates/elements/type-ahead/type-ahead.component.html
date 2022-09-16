@@ -12,19 +12,21 @@
       <ux-typeahead #typeahead class="typeahead-example" [(open)]="dropdownOpen" [filter]="value" [key]="keyfind"
         [display]="getDisplay" [options]="loadOptionsFn" [openOnFilterChange]="true" [pageSize]="40"
         [selectOnEnter]="selectOnEnter" [selectFirst]="selectFirst" [dropDirection]="dropDirection"
-        (optionSelected)="value = $event.option" [noOptionsTemplate]="noOptionsTemplate">
+        (optionSelected)="value = $event.option" [noOptionsTemplate]="noOptionsTemplate"
+        [optionTemplate]="optionTemplate">
       </ux-typeahead>
-      <ng-template #noOptionsTemplate>
-        <span class="ux-typeahead-no-options">No results</span>
-        <button class="btn-link m-l-8" (click)="createVariable()">
-          Save Value as Variable
-        </button>
-      </ng-template>
-      <!-- <ng-template #optionTemplate>
-                <span class="ux-typeahead-option ">
-                    <span class="ux-typeahead-option-text">{{option}}</span>
-                </span>
-            </ng-template> -->
     </div>
   </div>
 </div>
+
+<ng-template #optionTemplate let-option="option" let-index="index" let-api="api">
+  <span class="ux-typeahead-option ">
+    <span class="ux-typeahead-option-text" [title]="option?.value">{{option?.name}}</span>
+  </span>
+</ng-template>
+<ng-template #noOptionsTemplate>
+  <span class="ux-typeahead-no-options">No results</span>
+  <button class="btn-link m-l-8" (click)="createVariable()">
+    Save Value as Variable
+  </button>
+</ng-template>

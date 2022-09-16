@@ -27,7 +27,7 @@ export class TypeAheadComponent implements AfterViewInit, OnInit, ControlValueAc
   @Input('values') values: Array<any> = [];
   @Input('value')
 
-  _value: any;
+  _value: any = '';
 
   set value(val) {
     this._value = val;
@@ -54,14 +54,17 @@ export class TypeAheadComponent implements AfterViewInit, OnInit, ControlValueAc
   loadOptions(pageNum: number, pageSize: number, filter: any): Promise<ReadonlyArray<{ id, name }>> {
 
     try {
-      let filterString = filter?.name || filter?.id || filter;
-      this.value = filter?.id || filterString;
+      let filterString = filter?.name || filter?.id || filter || '';
+      this.value = filterString;
       filter = this.value;
+
       this.changeDetector.detectChanges();
-      const values = this.values.filter(({ id, name }) => {
-        return (id.toLowerCase().indexOf(this.value.toLowerCase()) !== -1) || (name.toLowerCase().indexOf(this.value.toLowerCase()) !== -1);
+      const values = this.values.filter(({ id, name, value }) => {
+        if (this.value == '') return true;
+        if (this.value)
+          return (id.toLowerCase().indexOf(this.value.toLowerCase()) !== -1) || name.toLowerCase().indexOf(this.value.toLowerCase()) !== -1 || (value.toLowerCase().indexOf(this.value.toLowerCase()) !== -1);
       })
-        .map(({ id, name }) => { return { id, name } })
+        .map(({ id, name, value }) => { return { id, name, value } })
         .slice(pageNum * pageSize, (pageNum + 1) * pageSize);
       return of(values).pipe(delay(100)).toPromise();
     }
@@ -80,9 +83,9 @@ export class TypeAheadComponent implements AfterViewInit, OnInit, ControlValueAc
 
   writeValue(value: any): void {
     this._value = value;
-    setTimeout(() => {
-      this.dropdownOpen = false;
-    }, 0);
+    // setTimeout(() => {
+    //   this.dropdownOpen = false;
+    // }, 0);
   }
   registerOnChange(fn: any): void {
   }
@@ -131,7 +134,7 @@ export class TypeAheadComponent implements AfterViewInit, OnInit, ControlValueAc
   }
 
   getDisplay(val: any): string {
-    return val.name
+    return val?.name;
   }
 
 }
