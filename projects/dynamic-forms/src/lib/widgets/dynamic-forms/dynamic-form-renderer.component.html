@@ -21,11 +21,9 @@
         placeholder="{{inputField?.placeholder||inputField?.label}}" [id]="inputField?.key" [name]="inputField?.label"
         class="form-control" [ngClass]="inlineFormElements?'flex-input ':''">
 
-      <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden">
-        <span></span>
-        <span class="validation-error-text">Required -
-          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
-          {{inputField?.label}}</span>
+      <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
+        <span></span> 
+        <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
     </ng-container>
 
@@ -54,11 +52,9 @@
             [multiselectable]="!!inputField?.multiselectable">
           </ux-typeahead>
         </ux-tag-input>
-        <ng-container *ngIf="!isValid && isTouched && !inputField?.labelHidden && !!inputField?.required ">
+        <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
           <span></span>
-          <span class="validation-error-text">Required -
-            {{( form.controls[inputField?.key].errors)? 'valid':'' }}
-            {{inputField?.label}}</span>
+          <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
         </ng-container>
       </div>
 
@@ -79,11 +75,9 @@
       <textarea [formControlName]="inputField?.key" rows="4" class="form-control" [formGroup]="form"
         placeholder="{{inputField?.placeholder||inputField?.label}}" [id]="inputField?.key" [name]="inputField?.label"
         [ngClass]="inlineFormElements?'flex-input ':'form-control'"></textarea>
-      <ng-container *ngIf="!isValid && isTouched">
+      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
-        <span class="validation-error-text">Required -
-          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
-          {{inputField?.label}}</span>
+        <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
     </ng-container>
 
@@ -98,9 +92,9 @@
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
       </label>
-      <type-ahead (valueChange)="valueInput($event);" [type]="inputField?.type" [formControlName]="inputField?.key"
-        [ngClass]="inlineFormElements?'flex-input ':''" [inputField]="inputField" [form]="form"
-        [values]="inputField?.options">
+      <type-ahead (valueChange)="valueInput($event);" [value]="" [type]="inputField?.type"
+        [formControlName]="inputField?.key" [ngClass]="inlineFormElements?'flex-input ':''" [inputField]="inputField"
+        [form]="form" [values]="inputField?.options">
       </type-ahead>
 
       <ng-container>
@@ -108,11 +102,9 @@
       </ng-container>
 
 
-      <ng-container *ngIf="!isValid && isTouched">
+      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
-        <span class="validation-error-text">Required -
-          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
-          {{inputField?.label}}</span>
+        <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
 
     </ng-container>
@@ -135,12 +127,9 @@
         [ngClass]="inlineFormElements?'flex-input':''" [allowNull]="true" [key]="'id'" [value]="inputField?.value"
         [display]="'name'" [options]="inputField?.options" placeholder="{{inputField?.placeholder||inputField?.label}}">
       </ux-select>
-      <ng-container *ngIf="!isValid && isTouched">
+      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
-        <span class="validation-error-text">Required -
-          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
-          {{inputField?.label}}
-        </span>
+        <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
 
     </ng-container>
@@ -163,12 +152,9 @@
           <span *ngIf="inputField?.required" class="form-control-validation">*</span>
         </span>
       </label>
-      <ng-container *ngIf="!isValid && isTouched">
+      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
-        <span class="validation-error-text">Required -
-          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
-          {{inputField?.label}}
-        </span>
+        <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
     </ng-container>
 
@@ -189,12 +175,9 @@
           </span>
         </label>
       </ng-container>
-      <ng-container *ngIf="!isValid && (isTouched || isDirty)">
+      <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
-        <span class="validation-error-text">Required -
-          {{( form.controls[inputField?.key].errors)? 'valid':'' }}
-          {{inputField?.label}}
-        </span>
+        <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
     </ng-container>
 

@@ -7,7 +7,8 @@
 
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { debounce, interval, Subject, } from 'rxjs';
+import { interval, Subject } from 'rxjs';
+import { debounce } from 'rxjs/operators';
 import { DynamicFormsControlService } from './dynamic-forms-control.service';
 import { FormInput } from './schema/form-input';
 
@@ -22,6 +23,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>();
   @Output() currentValue: EventEmitter<any> = new EventEmitter<any>();
   @Output() isFormValid?: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @Input() hideSubmit: boolean = false;
   @Input() disabled?: boolean = false;
   @Input() inlineFormElements?: boolean = false;
@@ -38,6 +40,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
     this.formValue.pipe(debounce(() => interval(this.debounce))).subscribe((value) => {
       this.currentValue.emit(JSON.stringify(this.form.getRawValue()))
     });
+    this.form.updateValueAndValidity({ onlySelf: false, emitEvent: true });
   }
 
 
@@ -75,12 +78,17 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
   submit(form) {
     this.payLoad = JSON.stringify(this.form.getRawValue());
-    if (this.form?.valid) { this.isFormValid.emit(true); this.onSubmit.emit(this.payLoad); }
+    if (this.form?.valid) { this.isFormValid.emit(this.form.valid); this.onSubmit.emit(this.payLoad); }
   }
 
 
   emitFormCurrentEvent() {
     this.formValue.next(this.payLoad);
+    this.isFormValid.emit(this.form.valid);
+  }
+
+  emitFormValidEvent(event){
+    this.isFormValid.emit(this.form.valid);
   }
 
 
@@ -132,9 +140,9 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
 
   emitChangeEvent(event) {
+    this.isFormValid.emit(this.form.valid);
     this.form.updateValueAndValidity({ onlySelf: false, emitEvent: false });
     this.payLoad = JSON.stringify(this.form.getRawValue());
-    this.form.valid ? this.isFormValid.emit(true) : this.isFormValid.emit(false);
     this.form.valid && (this.form.dirty || this.form.touched) ? this.emitFormCurrentEvent() : false;
   }
 

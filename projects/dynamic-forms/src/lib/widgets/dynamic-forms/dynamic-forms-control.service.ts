@@ -26,9 +26,9 @@ export class DynamicFormsControlService {
       if (disabled)
         form.disabled = disabled
       form.guid = VariableService.S4();
-      if (form.controlType == "multivalue") {
+      if (form?.controlType == "multivalue") {
         let defaultValue = [];
-        form.value.forEach(element => {
+        form?.value?.forEach(element => {
           defaultValue.push(this.addControls(form.key, formItems))
         });
         group[form.key] = new FormArray(defaultValue || []);
@@ -55,6 +55,7 @@ export class DynamicFormsControlService {
     let fields: any = formItems.find((q) => q.key == control);
     let form = fields ? fields.form : null;
     return this.toFormGroup(form);
+    
   }
 
 }

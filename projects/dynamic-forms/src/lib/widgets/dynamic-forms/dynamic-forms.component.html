@@ -40,17 +40,17 @@
                 </thead>
                 <tbody #select="ux-selection" [(uxSelection)]="inputField.selection" [clickSelection]="false"
                   [keyboardSelection]="false">
-                  <tr *ngFor="let item of form.controls[inputField.key]['controls']; let i = index;" [formGroupName]="i"
-                    [uxSelectionItem]="{item:item,i:i}" [(selected)]="item.selected">
+                  <tr *ngFor="let item of form?.controls[inputField?.key]['controls']; let i = index;"
+                    [formGroupName]="i" [uxSelectionItem]="{item:item,i:i}" [(selected)]="item.selected">
                     <td class="checkbox-column">
                       <ux-checkbox aria-hidden="true" class="m-b-nil" [(value)]="item.selected"
                         [id]="inputField?.key+'-'+inputField?.guid+'-'+i">
                       </ux-checkbox>
                     </td>
                     <td class="m-sm" *ngFor="let col of inputField?.form"
-                      [formGroup]="form.controls[inputField.key]['controls'][i]">
-                      <form-renderer [inputField]="col" (inputFieldChange)="emitChangeEvent($event)"
-                        [ngClass]="col?.classNames" [form]="form.controls[inputField.key]['controls'][i]">
+                      [formGroup]="form?.controls[inputField?.key]['controls'][i]">
+                      <form-renderer [inputField]="col" (inputFieldChange)="emitChangeEvent($event)" (isFormValid)="emitFormValidEvent($event)"
+                        [ngClass]="col?.classNames" [form]="form?.controls[inputField.key]['controls'][i]">
                       </form-renderer>
                     </td>
                     <td class="action">
@@ -78,7 +78,7 @@
           <div class="flex-layout-inputs" [ngClass]="inputField.classNames">
             <ng-container *ngFor="let field of inputField.form;let i = index;">
               <ng-container *ngIf="!field?.hidden && !field?.form">
-                <form-renderer [inputField]="field" (inputFieldChange)="emitChangeEvent($event)"
+                <form-renderer [inputField]="field" (inputFieldChange)="emitChangeEvent($event)"  (isFormValid)="emitFormValidEvent($event)"
                   class="{{field?.classNames}} flex-layout-inputs-{{inputField?.key}}-{{i}}" [form]="form"
                   [inlineFormElements]="setinlineForm"
                   [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group' + field?.classNames">
@@ -89,7 +89,7 @@
         </ng-container>
         <ng-container *ngSwitchDefault>
           <ng-container *ngIf="!inputField?.hidden && !inputField?.form">
-            <form-renderer [inputField]="_inputFields[i]" (inputFieldChange)="emitChangeEvent($event)" [form]="form"
+            <form-renderer [inputField]="_inputFields[i]" (inputFieldChange)="emitChangeEvent($event)" [form]="form"  (isFormValid)="emitFormValidEvent($event)"
               [inlineFormElements]="setinlineForm" class="{{inputField?.classNames}}"
               [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group' + inputField?.classNames">
             </form-renderer>

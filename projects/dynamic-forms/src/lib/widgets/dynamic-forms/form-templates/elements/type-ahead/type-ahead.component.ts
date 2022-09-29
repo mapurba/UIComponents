@@ -27,7 +27,7 @@ export class TypeAheadComponent implements AfterViewInit, OnInit, ControlValueAc
   @Input('values') values: Array<any> = [];
   @Input('value')
 
-  _value: any = '';
+  _value: any = "";
 
   set value(val) {
     this._value = val;
@@ -35,7 +35,7 @@ export class TypeAheadComponent implements AfterViewInit, OnInit, ControlValueAc
 
   }
   get value() {
-    return this._value;
+    return this._value || "";
   }
 
 
