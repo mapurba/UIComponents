@@ -32,6 +32,7 @@ export class FormInput<T> {
   selection?: any[];
   actionButtons?: ActionButtons[];
   placeholder?: string;
+  callBack?: Function;
   /**
   * if multivalue is true then the forms input is required  
   * cases:
@@ -80,6 +81,7 @@ export class FormInput<T> {
       actionButtons?: ActionButtons[];
       inline?: boolean;
       placeholder?: string;
+      callBack?: Function;
     } = {}
   ) {
     this.value = options.value;
@@ -110,6 +112,7 @@ export class FormInput<T> {
     this.selection = options.selection || null;
     this.actionButtons = options.actionButtons || null;
     this.placeholder = options.placeholder || '';
+    this.callBack = options.callBack || null;
   }
 }
 

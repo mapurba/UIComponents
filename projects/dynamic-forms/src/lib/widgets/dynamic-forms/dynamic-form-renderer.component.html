@@ -214,6 +214,24 @@
     </ng-container>
 
 
+    <!-- 
+    =========================================================================================================================
+     Link  
+    =========================================================================================================================
+    -->
+
+    <ng-container *ngSwitchCase="'link'">
+      <span *ngIf="inlineFormElements" class="flex-label"></span>
+      <span>
+        <a class="ias-checkbox" [ngClass]="inlineFormElements?'flex-input ':''"
+          (click)="inputField.callBack({form,inputField})">
+          <span>{{inputField?.label}} </span>
+        </a>
+        <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
+      </span>
+    </ng-container>
+
+
   </ng-container>
 </ng-container>
 
