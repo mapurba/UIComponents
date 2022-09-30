@@ -9,6 +9,7 @@ export class FormInput<T> {
   value: any;
   key: any;
   label?: string;
+  title?: string;
   labelHidden?: boolean;
   required: boolean;
   order: number;
@@ -52,6 +53,7 @@ export class FormInput<T> {
     options: {
       value?: any;
       key?: any;
+      title?: string;
       label?: string;
       labelHidden?: boolean;
       required?: boolean;
@@ -82,6 +84,7 @@ export class FormInput<T> {
   ) {
     this.value = options.value;
     this.key = options.key || "";
+    this.title = options.title || "";
     this.label = options.label || "";
     this.labelHidden = options.labelHidden || false;
     this.required = !!options.required;

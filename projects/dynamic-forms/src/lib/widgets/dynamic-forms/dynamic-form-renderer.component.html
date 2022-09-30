@@ -16,13 +16,14 @@
         *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+        <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
       </label>
       <input [type]="inputField?.type" [formControlName]="inputField?.key"
         placeholder="{{inputField?.placeholder||inputField?.label}}" [id]="inputField?.key" [name]="inputField?.label"
         class="form-control" [ngClass]="inlineFormElements?'flex-input ':''">
 
       <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
-        <span></span> 
+        <span></span>
         <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
     </ng-container>
@@ -38,6 +39,7 @@
         *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+        <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
       </label>
       <div>
         <ux-tag-input #tagInput [(input)]="inputField.input" [id]="inputField?.key" [formControlName]="inputField?.key"
@@ -52,7 +54,7 @@
             [multiselectable]="!!inputField?.multiselectable">
           </ux-typeahead>
         </ux-tag-input>
-        <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
+        <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
           <span></span>
           <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
         </ng-container>
@@ -71,11 +73,12 @@
         *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+        <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
       </label>
       <textarea [formControlName]="inputField?.key" rows="4" class="form-control" [formGroup]="form"
         placeholder="{{inputField?.placeholder||inputField?.label}}" [id]="inputField?.key" [name]="inputField?.label"
         [ngClass]="inlineFormElements?'flex-input ':'form-control'"></textarea>
-      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
+      <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
         <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
@@ -91,6 +94,7 @@
         *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+        <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
       </label>
       <type-ahead (valueChange)="valueInput($event);" [value]="" [type]="inputField?.type"
         [formControlName]="inputField?.key" [ngClass]="inlineFormElements?'flex-input ':''" [inputField]="inputField"
@@ -102,7 +106,7 @@
       </ng-container>
 
 
-      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
+      <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
         <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
@@ -122,12 +126,13 @@
         *ngIf="!inputField?.labelHidden">
         {{inputField?.label}}
         <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+        <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
       </label>
       <ux-select [formControlName]="inputField?.key" [multiple]="inputField?.multiValue" [clearButton]="true"
         [ngClass]="inlineFormElements?'flex-input':''" [allowNull]="true" [key]="'id'" [value]="inputField?.value"
         [display]="'name'" [options]="inputField?.options" placeholder="{{inputField?.placeholder||inputField?.label}}">
       </ux-select>
-      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
+      <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
         <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
@@ -150,9 +155,10 @@
         <i class="ias-icon ias-icon-check_thick ux-icon ux-icon-active"></i>
         <span>{{inputField.label}}
           <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+          <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
         </span>
       </label>
-      <ng-container  *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
+      <ng-container *ngIf="hasErrors() && isTouched && !inputField?.labelHidden">
         <span></span>
         <span *ngIf="hasErrors()" class="validation-error-text">{{getErrors()|titlecase}}</span>
       </ng-container>
@@ -172,6 +178,7 @@
           <i class="ias-icon ias-icon-check_thick ux-icon ux-icon-active"></i>
           <span>{{opt?.name||opt?.id}}
             <span *ngIf="inputField?.required" class="form-control-validation">*</span>
+            <i [title]="inputField?.title" *ngIf="inputField?.title" class="ux-icon ux-icon-information info-title"></i>
           </span>
         </label>
       </ng-container>

@@ -23,6 +23,7 @@ export class TagInput extends FormInput<any> {
         options: {
             value: any;
             key: any;
+            title?: string;
             label?: string;
             labelHidden?: boolean;
             required?: boolean;
@@ -52,6 +53,7 @@ export class TagInput extends FormInput<any> {
         this.value = options.value;
         this.key = options.key || "";
         this.label = options.label || "";
+        this.title =this.title || "";
         this.labelHidden = !!options.labelHidden
         this.required = !!options.required;
         this.order = options.order === undefined ? 1 : options.order;

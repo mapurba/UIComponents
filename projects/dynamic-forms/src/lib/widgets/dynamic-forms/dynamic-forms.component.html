@@ -35,7 +35,6 @@
                       </ux-checkbox>
                     </th>
                     <th *ngFor="let item of inputField?.form; let i = index"> {{item?.label}} </th>
-                    <!-- <th></th> -->
                   </tr>
                 </thead>
                 <tbody #select="ux-selection" [(uxSelection)]="inputField.selection" [clickSelection]="false"
@@ -54,18 +53,6 @@
                         [form]="form?.controls[inputField.key]['controls'][i]">
                       </form-renderer>
                     </td>
-                    <!-- <td class="action">
-                      <button type="button" class="btn btn-icon  btn-link button-secondary ux-focus-indicator"
-                        aria-label="Delete" title="{{'Delete'}}" uxTooltip="Delete" (click)=""
-                        uxHoverAction>
-                        <i class=" ux-icon ux-icon-close"></i>
-                      </button>
-                      <button type="button" class="btn btn-icon  btn-link button-secondary ux-focus-indicator"
-                        aria-label="Delete" title="{{'Delete'}}" uxTooltip="Delete" (click)="removeAt(inputField,i)"
-                        uxHoverAction>
-                        <i class=" ux-icon ux-icon-close"></i>
-                      </button>
-                    </td> -->
                   </tr>
                 </tbody>
               </table>
