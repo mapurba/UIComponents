@@ -13,7 +13,7 @@
               {{inputField?.label}}
               <span *ngIf="inputField?.required" class="form-control-validation">*</span>
             </label>
-            <div [ngClass]="setinlineForm?'flex-input':' form-table p-a-0'" [id]="inputField?.key">
+            <div [ngClass]="setinlineForm?'flex-input':' form-table p-a-0'"  class="multiValue-form" [id]="inputField?.key">
               <div class="btn-container">
                 <button type="button" (click)="addControls(inputField.key)"
                   class="btn btn-icon btn-link button-secondary " title="Add">
@@ -35,7 +35,7 @@
                       </ux-checkbox>
                     </th>
                     <th *ngFor="let item of inputField?.form; let i = index"> {{item?.label}} </th>
-                    <th></th>
+                    <!-- <th></th> -->
                   </tr>
                 </thead>
                 <tbody #select="ux-selection" [(uxSelection)]="inputField.selection" [clickSelection]="false"
@@ -49,17 +49,23 @@
                     </td>
                     <td class="m-sm" *ngFor="let col of inputField?.form"
                       [formGroup]="form?.controls[inputField?.key]['controls'][i]">
-                      <form-renderer [inputField]="col" (inputFieldChange)="emitChangeEvent($event)" (isFormValid)="emitFormValidEvent($event)"
-                        [ngClass]="col?.classNames" [form]="form?.controls[inputField.key]['controls'][i]">
+                      <form-renderer [inputField]="col" (inputFieldChange)="emitChangeEvent($event)"
+                        (isFormValid)="emitFormValidEvent($event)" [ngClass]="col?.classNames"
+                        [form]="form?.controls[inputField.key]['controls'][i]">
                       </form-renderer>
                     </td>
-                    <td class="action">
+                    <!-- <td class="action">
                       <button type="button" class="btn btn-icon  btn-link button-secondary ux-focus-indicator"
-                        aria-label="Delete" title="{{'Delete'}}" uxTooltip="Delete"
-                        (click)="removeControls(inputField.key,i)" uxHoverAction>
+                        aria-label="Delete" title="{{'Delete'}}" uxTooltip="Delete" (click)=""
+                        uxHoverAction>
                         <i class=" ux-icon ux-icon-close"></i>
                       </button>
-                    </td>
+                      <button type="button" class="btn btn-icon  btn-link button-secondary ux-focus-indicator"
+                        aria-label="Delete" title="{{'Delete'}}" uxTooltip="Delete" (click)="removeAt(inputField,i)"
+                        uxHoverAction>
+                        <i class=" ux-icon ux-icon-close"></i>
+                      </button>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
@@ -78,7 +84,8 @@
           <div class="flex-layout-inputs" [ngClass]="inputField.classNames">
             <ng-container *ngFor="let field of inputField.form;let i = index;">
               <ng-container *ngIf="!field?.hidden && !field?.form">
-                <form-renderer [inputField]="field" (inputFieldChange)="emitChangeEvent($event)"  (isFormValid)="emitFormValidEvent($event)"
+                <form-renderer [inputField]="field" (inputFieldChange)="emitChangeEvent($event)"
+                  (isFormValid)="emitFormValidEvent($event)"
                   class="{{field?.classNames}} flex-layout-inputs-{{inputField?.key}}-{{i}}" [form]="form"
                   [inlineFormElements]="setinlineForm"
                   [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group' + field?.classNames">
@@ -89,8 +96,9 @@
         </ng-container>
         <ng-container *ngSwitchDefault>
           <ng-container *ngIf="!inputField?.hidden && !inputField?.form">
-            <form-renderer [inputField]="_inputFields[i]" (inputFieldChange)="emitChangeEvent($event)" [form]="form"  (isFormValid)="emitFormValidEvent($event)"
-              [inlineFormElements]="setinlineForm" class="{{inputField?.classNames}}"
+            <form-renderer [inputField]="_inputFields[i]" (inputFieldChange)="emitChangeEvent($event)" [form]="form"
+              (isFormValid)="emitFormValidEvent($event)" [inlineFormElements]="setinlineForm"
+              class="{{inputField?.classNames}}"
               [ngClass]="setinlineForm?'d-flex form-group form-inline-group':'form-twoline-group' + inputField?.classNames">
             </form-renderer>
           </ng-container>

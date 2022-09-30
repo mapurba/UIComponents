@@ -19,7 +19,7 @@ import { FormInput } from './schema/form-input';
 export class DynamicFormsControlService {
   constructor() { }
 
-  public toFormGroup(formItems: FormInput<string>[], disabled = false) {
+  public toFormGroup(formItems: FormInput<string>[], disabled = false, validators = null) {
     const group: any = {};
 
     formItems.forEach((form: any) => {
@@ -48,14 +48,17 @@ export class DynamicFormsControlService {
           group[form.key].markAsTouched();
       }
     });
+    if (validators != null)
+      return new FormGroup(group, validators);
     return new FormGroup(group);
+
   }
 
   public addControls(control: string, formItems: FormInput<string>[]) {
     let fields: any = formItems.find((q) => q.key == control);
     let form = fields ? fields.form : null;
     return this.toFormGroup(form);
-    
+
   }
 
 }

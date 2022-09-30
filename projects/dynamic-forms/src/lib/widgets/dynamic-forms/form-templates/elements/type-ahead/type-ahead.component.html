@@ -5,14 +5,14 @@
         [type]="type" (click)="dropdownOpen = true" (blur)="dropdownOpen = false"
         (keydown)="typeaheadKeyService.handleKey($event, typeahead)" (keydown.escape)="dropdownOpen = false" />
 
-      <textarea id="textarea-regular" [(ngModel)]="_value" *ngIf="type === 'textarea'" (click)="dropdownOpen = true"
+      <textarea [(ngModel)]="_value" *ngIf="type === 'textarea'" (click)="dropdownOpen = true"
         (blur)="dropdownOpen = false" (keydown)="typeaheadKeyService.handleKey($event, typeahead)"
         (keydown.escape)="dropdownOpen = false" class="form-control"></textarea>
 
       <ux-typeahead #typeahead class="typeahead-example" [(open)]="dropdownOpen" [filter]="_value" [key]="keyfind"
         [display]="getDisplay" [options]="loadOptionsFn" [openOnFilterChange]="true" [pageSize]="40"
         [selectOnEnter]="selectOnEnter" [selectFirst]="selectFirst" [dropDirection]="dropDirection"
-        (optionSelected)="_value = $event.option" [noOptionsTemplate]="noOptionsTemplate"
+        (optionSelected)="_value = $event.option;" [noOptionsTemplate]="noOptionsTemplate"
         [optionTemplate]="optionTemplate">
       </ux-typeahead>
     </div>
@@ -21,7 +21,7 @@
 
 <ng-template #optionTemplate let-option="option" let-index="index" let-api="api">
   <span class="ux-typeahead-option ">
-    <span class="ux-typeahead-option-text" [title]="option?.value">{{option?.name}}</span>
+    <span class="ux-typeahead-option-text" [title]="option?.name">{{option?.value}}</span>
   </span>
 </ng-template>
 <ng-template #noOptionsTemplate>

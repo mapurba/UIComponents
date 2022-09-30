@@ -59,6 +59,10 @@ $sides: (
     }
 }
 
+.multiValue-form{
+    background: #f0f0f0;
+    padding:4px;
+}
 
 
 
@@ -67,8 +71,8 @@ $sides: (
     border-collapse: collapse;
     text-align: left;
     width: 100%;
-    background: #d0d2d236;
-
+    background: #f0f0f0;
+    margin-top: 4px;
 
     thead {
         tr {

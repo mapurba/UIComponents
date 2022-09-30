@@ -35,7 +35,7 @@ export class TypeAheadComponent implements AfterViewInit, OnInit, ControlValueAc
 
   }
   get value() {
-    return this._value || "";
+    return this._value || null;
   }
 
 

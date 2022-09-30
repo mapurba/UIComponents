@@ -5,7 +5,7 @@
 */
 
 
-import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { debounce } from 'rxjs/operators';
@@ -30,13 +30,14 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   @Input() virtualScroller?: boolean = false;
   @Input() form?: FormGroup;
   @Input() debounce?: number = 100;
+  @Input() validators?: any;
   @ViewChild('formdiv') formdiv: ElementRef;
 
   public _inputFields: FormInput<any>[];
   @Input("inputFields")
   set inputFields(val: FormInput<any>[]) {
     this._inputFields = val;
-    this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
+    this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled, this.validators);
     this.formValue.pipe(debounce(() => interval(this.debounce))).subscribe((value) => {
       this.currentValue.emit(JSON.stringify(this.form.getRawValue()))
     });
@@ -51,7 +52,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   payLoad = '';
   selectedKey: any;
 
-  constructor(private dfcs: DynamicFormsControlService, private _ngZone: NgZone, private _cdr: ChangeDetectorRef) {
+  constructor(private dfcs: DynamicFormsControlService, private _ngZone: NgZone, private _cdr: ChangeDetectorRef, private renderer: Renderer2) {
 
   }
 
@@ -72,7 +73,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
+    this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled, this.validators);
     this.setinlineForm = this.inlineFormElements;
   }
 
@@ -87,7 +88,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
     this.isFormValid.emit(this.form.valid);
   }
 
-  emitFormValidEvent(event){
+  emitFormValidEvent(event) {
     this.isFormValid.emit(this.form.valid);
   }
 
@@ -104,7 +105,7 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
 
 
   clearData() {
-    this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled);
+    this.form = this.dfcs.toFormGroup(this._inputFields, this.disabled, this.validators);
   }
   addControls(control: string) {
     if (!this.form.get(control).valid) return;
@@ -120,9 +121,12 @@ export class DynamicFormsComponent implements OnInit, AfterViewChecked {
     this.emitChangeEvent(null);
   }
 
-  removeControls(control: string, index) {
-    let array = this.form.get(control) as FormArray;
-    array.removeAt(index);
+  removeAt( control: FormInput<any>, i) {
+    control.selection = [];
+    const array = this.form.get(control.key) as FormArray;
+    array.removeAt(i);
+    
+    this.form.markAsDirty();
     this.emitChangeEvent(null);
   }
 
